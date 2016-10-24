@@ -2,7 +2,7 @@
 
 This is the working area for the Working Group internet-draft, "Reusable Interface Definitions for Constrained RESTful Environments".
 
-* [Editor's copy](https://core-wg.github.io/interfaces/)  [![Build Status](https://travis-ci.org/core-wg/etch.svg?branch=master)](https://travis-ci.org/core-wg/etch)
+* [Editor's copy](https://core-wg.github.io/interfaces/)  [![Build Status](https://travis-ci.org/core-wg/interfaces.svg?branch=master)](https://travis-ci.org/core-wg/interfaces)
 * [Working Group Draft] (https://tools.ietf.org/html/draft-ietf-core-interfaces)
 
 
