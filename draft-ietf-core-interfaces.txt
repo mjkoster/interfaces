@@ -5,12 +5,12 @@
 CoRE Working Group                                             Z. Shelby
 Internet-Draft                                                       ARM
 Intended status: Informational                                   Z. Vial
-Expires: March 17, 2017                               Schneider-Electric
+Expires: May 1, 2017                                  Schneider-Electric
                                                                M. Koster
                                                              SmartThings
                                                                C. Groves
                                                                   Huawei
-                                                      September 13, 2016
+                                                        October 28, 2016
 
 
   Reusable Interface Definitions for Constrained RESTful Environments
@@ -18,29 +18,23 @@ Expires: March 17, 2017                               Schneider-Electric
 
 Abstract
 
-   This document defines a set of reusable REST resource design patterns
-   suitable for use in constrained environments, based on IETF CoRE
-   standards for information representation and information exchange.
+   This document defines a set of Constrained RESTful Environments
+   (CoRE) Link Format Interface Descriptions [RFC6690] applicable for
+   use in constrained environments.  These include the: Actuator,
+   Paramter, Read-only parameter, Sensor, Batch, Linked Batch and Link
+   List interfaces.
 
-   Interface types for Sensors, Actuators, Parameters, and resource
-   Collections are defined using the "if" link attribute defined by CoRE
-   Link Format [RFC6690].  Clients may use the "if" attribute to
-   determine how to consume resources.
+   The Batch, Linked Batch and Link List interfaces make use of resource
+   collections.  This document further describes how collections relate
+   to interfaces.
 
-   Editor's note: This version removes the observe notify functionality.
-   Further work is needed on this draft to:
+   Many applications require a set of interface descriptions in order
+   provide the required functionality.  This document defines the
+   concept of function sets to specify this set of interfaces and
+   resources.
 
-   1.  Focus the interfaces draft exclusively on interfaces and
-       collections, and make it clear that this is not the IETF
-       officialy endorsed way to use REST.  Build compatibility with OCF
-       collections to the most reasonable extent, otherwise, try to fnid
-       best practice guidance.
-
-   2.  Tone down the formality of function set definition and remove the
-       perception that CoRE Interfaces defines REST function sets.
-       Instead, find some descriptive language that accomplishes the
-       same thing in RD, Pubsub, Interfaces, and other drafts that want
-       to define REST API profiles for mapping functions.
+   _Editor's note: The git repository for the draft is found at
+   https://github.com/core-wg/interfaces_
 
 Status of This Memo
 
@@ -49,15 +43,6 @@ Status of This Memo
 
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                 [Page 1]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
    working documents as Internet-Drafts.  The list of current Internet-
    Drafts is at http://datatracker.ietf.org/drafts/current/.
 
@@ -66,7 +51,14 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 17, 2017.
+
+
+Shelby, et al.             Expires May 1, 2017                  [Page 1]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+   This Internet-Draft will expire on May 1, 2017.
 
 Copyright Notice
 
@@ -86,50 +78,62 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-   2.  Requirements Language . . . . . . . . . . . . . . . . . . . .   4
-   3.  Interface Types . . . . . . . . . . . . . . . . . . . . . . .   5
-   4.  Collections . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     4.1.  Introduction to Collections . . . . . . . . . . . . . . .   5
-     4.2.  Use Cases for Collections . . . . . . . . . . . . . . . .   6
-     4.3.  Content-Formats for Collections . . . . . . . . . . . . .   6
-     4.4.  Links and Items in Collections  . . . . . . . . . . . . .   7
-     4.5.  Queries on Collections  . . . . . . . . . . . . . . . . .   8
-     4.6.  Observing Collections . . . . . . . . . . . . . . . . . .   8
-     4.7.  Collection Types  . . . . . . . . . . . . . . . . . . . .   8
-   5.  Interfaces Descriptions . . . . . . . . . . . . . . . . . . .   9
-     5.1.  Link List . . . . . . . . . . . . . . . . . . . . . . . .  11
-     5.2.  Batch . . . . . . . . . . . . . . . . . . . . . . . . . .  11
-     5.3.  Linked Batch  . . . . . . . . . . . . . . . . . . . . . .  12
-     5.4.  Sensor  . . . . . . . . . . . . . . . . . . . . . . . . .  13
-     5.5.  Parameter . . . . . . . . . . . . . . . . . . . . . . . .  14
-     5.6.  Read-only Parameter . . . . . . . . . . . . . . . . . . .  14
-     5.7.  Actuator  . . . . . . . . . . . . . . . . . . . . . . . .  14
-     5.8.  Future Interfaces . . . . . . . . . . . . . . . . . . . .  15
-   6.  Function Sets and Profiles  . . . . . . . . . . . . . . . . .  15
+   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
+   3.  Collections . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     3.1.  Introduction to Collections . . . . . . . . . . . . . . .   5
+     3.2.  Use Cases for Collections . . . . . . . . . . . . . . . .   6
+     3.3.  Content-Formats for Collections . . . . . . . . . . . . .   6
+     3.4.  Links and Items in Collections  . . . . . . . . . . . . .   7
+     3.5.  Queries on Collections  . . . . . . . . . . . . . . . . .   8
+     3.6.  Observing Collections . . . . . . . . . . . . . . . . . .   8
+     3.7.  Collection Types  . . . . . . . . . . . . . . . . . . . .   9
+   4.  Interface Descriptions  . . . . . . . . . . . . . . . . . . .   9
+     4.1.  Link List . . . . . . . . . . . . . . . . . . . . . . . .  11
+     4.2.  Batch . . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     4.3.  Linked Batch  . . . . . . . . . . . . . . . . . . . . . .  12
+     4.4.  Sensor  . . . . . . . . . . . . . . . . . . . . . . . . .  13
+     4.5.  Parameter . . . . . . . . . . . . . . . . . . . . . . . .  14
+     4.6.  Read-only Parameter . . . . . . . . . . . . . . . . . . .  14
+     4.7.  Actuator  . . . . . . . . . . . . . . . . . . . . . . . .  14
+   5.  Function Sets and Profiles  . . . . . . . . . . . . . . . . .  15
+     5.1.  Defining a Function Set . . . . . . . . . . . . . . . . .  16
+       5.1.1.  Path template . . . . . . . . . . . . . . . . . . . .  16
+       5.1.2.  Resource Type . . . . . . . . . . . . . . . . . . . .  16
+       5.1.3.  Interface Description . . . . . . . . . . . . . . . .  17
+       5.1.4.  Data type . . . . . . . . . . . . . . . . . . . . . .  17
+     5.2.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .  17
+     5.3.  Versioning  . . . . . . . . . . . . . . . . . . . . . . .  17
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  18
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  18
+     7.1.  Link List . . . . . . . . . . . . . . . . . . . . . . . .  18
 
 
 
-Shelby, et al.           Expires March 17, 2017                 [Page 2]
+Shelby, et al.             Expires May 1, 2017                  [Page 2]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
-     6.1.  Defining a Function Set . . . . . . . . . . . . . . . . .  16
-       6.1.1.  Path template . . . . . . . . . . . . . . . . . . . .  16
-       6.1.2.  Resource Type . . . . . . . . . . . . . . . . . . . .  16
-       6.1.3.  Interface Description . . . . . . . . . . . . . . . .  17
-       6.1.4.  Data type . . . . . . . . . . . . . . . . . . . . . .  17
-     6.2.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .  17
-     6.3.  Versioning  . . . . . . . . . . . . . . . . . . . . . . .  18
-   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  18
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  18
-   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  18
-   10. Changelog . . . . . . . . . . . . . . . . . . . . . . . . . .  18
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  20
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  20
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  21
-   Appendix A.  Profile example  . . . . . . . . . . . . . . . . . .  21
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  22
+     7.2.  Batch . . . . . . . . . . . . . . . . . . . . . . . . . .  18
+     7.3.  Linked Batch  . . . . . . . . . . . . . . . . . . . . . .  18
+     7.4.  Sensor  . . . . . . . . . . . . . . . . . . . . . . . . .  19
+     7.5.  Parameter . . . . . . . . . . . . . . . . . . . . . . . .  19
+     7.6.  Read-only parameter . . . . . . . . . . . . . . . . . . .  19
+     7.7.  Actuator  . . . . . . . . . . . . . . . . . . . . . . . .  19
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  20
+   9.  Changelog . . . . . . . . . . . . . . . . . . . . . . . . . .  20
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  22
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  23
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  23
+   Appendix A.  Current Usage of Interfaces and Function Sets  . . .  24
+     A.1.  Constrained RESTful Environments (CoRE) Link Format
+           (IETF)  . . . . . . . . . . . . . . . . . . . . . . . . .  25
+     A.2.  CoRE Resource Directory  (IETF) . . . . . . . . . . . . .  25
+     A.3.  Open Connectivity Foundation (OCF)  . . . . . . . . . . .  25
+     A.4.  oneM2M  . . . . . . . . . . . . . . . . . . . . . . . . .  26
+     A.5.  OMA LWM2M . . . . . . . . . . . . . . . . . . . . . . . .  26
+   Appendix B.  Profile example  . . . . . . . . . . . . . . . . . .  27
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  28
 
 1.  Introduction
 
@@ -150,106 +154,115 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    use of Web Linking for the description and discovery of resources
    hosted by constrained web servers is specified by CoRE Link Format
    [RFC6690].  CoRE Link Format additionally defines a link attribute
-   for Interface Type ("if") that can be used to describe the REST
-   interface of a resource, and may include a link to a description
+   for interface description ("if") that can be used to describe the
+   REST interface of a resource, and may include a link to a description
    document.
 
-   This document defines a set of Link Format compatible Interface Types
-   for some common design patterns that enable the server side
-   composition and organization, and client side discovery and
-   consumption, of machine resources using Web Linking.  An Interface
-   Type may describe a resource in terms of it's associated content
-   formats, data types, URI templates, REST methods, parameters, and
-   responses.  Basic interface types are defined for sensors, actuators,
-   and properties.  A set of collection types is defined for organizing
+   This document defines a set of Link Format interface descriptions for
+   some common design patterns that enable the server side composition
+   and organization, and client side discovery and consumption, of
+   machine resources using Web Linking.  A client discovering the "if"
 
 
 
-Shelby, et al.           Expires March 17, 2017                 [Page 3]
+Shelby, et al.             Expires May 1, 2017                  [Page 3]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
-   resources for discovery, and for various forms of bulk interaction
-   with resource sets using typed embedding links.
-
-   Interface Types may be used in the composition of Function Sets and
-   Profiles.  Function Sets and Profiles are described and an example is
-   given of a sensor and actuator device profile using Function Sets
-   composed from the Interface Types described in this document.
-
-   This document describes a set of Interface Types which are referenced
-   by the "if" link attribute and used to implement reusable design
-   patterns and functional abstractions.  A client discovering the "if"
    link attribute will be able to consume resources based on its
    knowledge of the expected interface types.  In this sense the
    Interface Type acts in a similar way as a Content-Format, but as a
    selector for a high level functional abstraction.
 
-2.  Requirements Language
+   An interface description describes a resource in terms of it's
+   associated content formats, data types, URI templates, REST methods,
+   parameters, and responses.  Basic interface descriptions are defined
+   for sensors, actuators, and properties.
+
+   A set of collection types is defined for organizing resources for
+   discovery, and for various forms of bulk interaction with resource
+   sets using typed embedding links.
+
+   Interface descriptions may be used in the composition of Function
+   Sets and Profiles.  Function Sets and Profiles are described and an
+   example is given of a sensor and actuator device profile using
+   Function Sets composed from the interface descriptions described in
+   this document.
+
+   This document first defines the concept of collection interface
+   descriptions.  It then defines a number of generic interface
+   descriptions that may be used in contrained environments.  Several of
+   these interface descriptions utilise collections.  The interface
+   descriptions are then used by the function sets.
+
+   Whilst this document assumes the use of CoAP [RFC7252], the REST
+   interfaces described can also be realized using HTTP [RFC7230].
+
+2.  Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in
    [RFC2119].
 
-   This specification requires readers to be familiar with all the terms
-   and concepts that are discussed in [RFC5988] and [RFC6690].  This
-   specification makes use of the following additional terminology:
+   This document requires readers to be familiar with all the terms and
+   concepts that are discussed in [RFC5988] and [RFC6690].  This
+   document makes use of the following additional terminology:
 
-   Interface Type:  A resource attribute which describes the interface
-      exposed by the resource in terms of content formats, REST methods,
-      parameters, and other related characteristics.
-
-   Collection:  A resource which contains set of related resources,
-      referenced by a list of links and optionally consisting of
-      subresources.
-
-   Resource Discovery:  The process allowing a web client to identify
-      resources being hosted on a web server.
-
-   Gradual Reveal:  A REST design where resources are discovered
-      progressively using Web Linking.
+   Device:  An IP smart object running a web server that hosts a group
+      of Function Set instances from a profile.
 
    Function Set:  A group of well-known REST resources that provides a
       particular service.
 
+   Gradual Reveal:  A REST design where resources are discovered
+      progressively using Web Linking.
+
+
+
+Shelby, et al.             Expires May 1, 2017                  [Page 4]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+   Interface Description:  The Interface Description describes the
+      generic REST interface to interact with a resource or a set of
+      resources.  Its use is described via the Interface Description
+      'if' attribute which is an opaque string used to provide a name or
+      URI indicating a specific interface definition used to interact
+      with the target resource.  One can think of this as describing
+      verbs usable on a resource.
+
    Profile:  A group of well-known Function Sets defined by a
       specification.
 
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                 [Page 4]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
-   Device:  An IP smart object running a web server that hosts a group
-      of Function Set instances from a profile.
+   Resource Discovery:  The process allowing a web client to identify
+      resources being hosted on a web server.
 
    Service Discovery:  The process making it possible for a web client
       to automatically detect devices and Function Sets offered by these
       devices on a CoRE network.
 
-3.  Interface Types
+3.  Collections
 
-   An Interface Type definition may describe a resource in terms of it's
-   associated content formats, data types, URI templates, REST methods,
-   parameters, and responses.
-
-4.  Collections
-
-4.1.  Introduction to Collections
+3.1.  Introduction to Collections
 
    A Collection is a resource which represents one or more related
-   resources.  Within this document, a collection refers to a collection
-   with characteristics defined in this document.  A Collection
-   Interface Type consists of a set of links and a set of items pointed
-   to by the links which may be sub-resources of the collection
-   resource.  The collection types described in this document are Link
-   List, Batch and Linked Batch.
+   resources.  [RFC6573] describes the "item" and "collection" Link
+   Relation. "item" link relation identifies a member of collection.
+   "collection" indicates the collection that an item is a member of.
+   For example: A collection might be a resource representing catalog of
+   products, an item is a resource related to an individual product.
+
+   Section 1.2.2/[RFC6690] also describes resource collections.
+
+   This document uses the concept of "collection" and applies it to
+   interface descriptions.  A collection interface description consists
+   of a set of links and a set of items pointed to by the links which
+   may be sub-resources of the collection resource.  The collection
+   interface descriptions described in this document are Link List,
+   Batch and Linked Batch.
 
    The links in a collection are represented in CoRE Link-Format
    Content-Formats including JSON and CBOR variants, and the items in
@@ -260,6 +273,14 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    A particular resource item may be a member of more than one
    collection at a time by being linked to, but may only be a
    subresource of one collection.
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                  [Page 5]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
 
    Some collections may have pre-configured items and links, and some
    collections may support dynamic creation and removal of items and
@@ -273,20 +294,11 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    For example, performing a GET on a collection resource may return a
    single representation containing all of the linked resources.
 
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                 [Page 5]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
    Links in collections may be selected for processing by a particular
    request by using Query Filtering as described in CoRE Link-Format
    [RFC6690].
 
-4.2.  Use Cases for Collections
+3.2.  Use Cases for Collections
 
    Collections may be used to provide gradual reveal of resources on an
    endpoint.  There may be a small set of links at the .well-known/core
@@ -310,14 +322,22 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    the collection.
 
    Items may be sub-resources of the collection resource.  This enables
-   updates to to multiple items in the collection to be processed
-   together within the context of the collection resource.
+   updates to multiple items in the collection to be processed together
+   within the context of the collection resource.
 
-4.3.  Content-Formats for Collections
+3.3.  Content-Formats for Collections
 
    The collection interfaces by default use CoRE Link-Format for the
    link representations and SenML or text/plain for representations of
    items.  The examples given are for collections that expose resources
+
+
+
+Shelby, et al.             Expires May 1, 2017                  [Page 6]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
    and links in these formats.  In addition, a new "collection" Content-
    Format is defined based on the SenML framework which represents both
    links and items in the collection.
@@ -329,15 +349,6 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    by the Content-Format option in the header of the update request
    operation.
 
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                 [Page 6]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
    The default Content-Formats for collection types described in this
    document are:
 
@@ -345,16 +356,16 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
    Items:  application/senml+json, text/plain
 
-4.4.  Links and Items in Collections
+3.4.  Links and Items in Collections
 
    Links use CoRE Link-Format representation by default and may point to
    any resource reachable from the context of the collection.  This
    includes absolute links and links that point to other network
    locations if the context of the collection allows.  Links to sub-
    resources in the collection MUST have a path-element starting with
-   the resource name, as per RFC3986 [RFC3986].  Links to resources in
-   the global context MUST start with a root path identifier [RFC5988].
-   Links to other collections are formed per RFC3986.
+   the resource name, as per [RFC3986].  Links to resources in the
+   global context MUST start with a root path identifier [RFC5988].
+   Links to other collections are formed per [RFC3986].
 
    Examples of links:
 
@@ -376,6 +387,13 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
       collection in which the link appears ,but is expected to be
       identified in the collection by resource name.
 
+
+
+Shelby, et al.             Expires May 1, 2017                  [Page 7]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
    Links in the collection MAY be Read, Updated, Added, or Removed using
    the CoRE Link-Format or JSON Merge-Patch Content-Formats on the
    collection resource.  Reading links uses the GET method and returns
@@ -384,15 +402,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    Updates to links MUST use the PATCH method and MAY use query
    filtering to select links for updating.  The PATCH method on links
    MUST use the JSON Merge-Patch Content-Format (application/merge-
-   patch+json) specified in RFC7396 [RFC7396].
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                 [Page 7]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
+   patch+json) specified in [RFC7396].
 
    Items in the collection SHOULD be represented using the SenML
    (application/senml+json) or plain text (text/plain) Content-Formats,
@@ -414,7 +424,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    item in the collection.  Group updates are indicated by the link
    relation type rel="grp" in the link.
 
-4.5.  Queries on Collections
+3.5.  Queries on Collections
 
    Collections MAY support query filtering as defined in CoRE Link-
    Format [RFC6690].  Operations targeting either the links or the items
@@ -422,33 +432,30 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    query filtering.  The Content-Format specified in the request header
    selects whether links or items are targeted by the operation.
 
-4.6.  Observing Collections
+3.6.  Observing Collections
 
-   Resource Observation I-D.ietf-core-dynlink using CoAP [RFC7252] MAY
-   be supported on items in a collection.  A subset of the conditional
-   observe parameters MAY be specified to apply.  In most cases pmin and
-   pmax are useful.  Resource observation on a collection's items
-   resource MAY report any changes of resource state in any item in the
-   collection.  Observation Responses, or notifications, SHOULD provide
-   representations of the resources that have changed in SenML Content-
-   Format.  Notifications MAY include multiple observations of a
-   particular resource, with SenML time stamps indicating the
-   observation times.
+   Resource Observation via [I-D.ietf-core-dynlink] using CoAP [RFC7252]
+   MAY be supported on items in a collection.  A subset of the
+   conditional observe parameters MAY be specified to apply.  In most
+   cases pmin and pmax are useful.  Resource observation on a
+   collection's items resource MAY report any changes of resource state
+   in any item in the collection.  Observation Responses, or
+   notifications, SHOULD provide representations of the resources that
+   have changed in SenML Content-Format.  Notifications MAY include
 
-4.7.  Collection Types
+
+
+Shelby, et al.             Expires May 1, 2017                  [Page 8]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+   multiple observations of a particular resource, with SenML time
+   stamps indicating the observation times.
+
+3.7.  Collection Types
 
    There are three collection types defined in this document:
-
-
-
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                 [Page 8]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
 
             +-----------------+---------+--------------------+
             | Collection Type | if=     | Content-Format     |
@@ -462,12 +469,10 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
                      Table 1: Collection Type Summary
 
-   Each collection type MAY support a subset of the methods and
-   functions described above.  For the first three collection types, the
-   methods and functions are defined in the corresponding Interface
-   Description.
+   The interface description defined in this document describes the
+   methods and functions that may be applied to the collections.
 
-5.  Interfaces Descriptions
+4.  Interface Descriptions
 
    This section defines REST interfaces for Link List, Batch, Sensor,
    Parameter and Actuator resources.  Variants such as Linked Batch or
@@ -481,10 +486,10 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    that interface.  When this value appears in the if= attribute of a
    link, the resource MUST support the corresponding REST interface
    described in this section.  The resource MAY support additional
-   functionality, which is out of scope for this specification.
-   Although these interface descriptions are intended to be used with
-   the CoRE Link Format, they are applicable for use in any REST
-   interface definition.
+   functionality, which is out of scope for this document.  Although
+   these interface descriptions are intended to be used with the CoRE
+   Link Format, they are applicable for use in any REST interface
+   definition.
 
    The Methods column defines the methods supported by that interface,
    which are described in more detail below.
@@ -496,14 +501,9 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
 
 
-
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                 [Page 9]
+Shelby, et al.             Expires May 1, 2017                  [Page 9]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
      +--------------+---------+-----------------+--------------------+
@@ -534,11 +534,11 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
      |              |         |                 | text/plain         |
      +--------------+---------+-----------------+--------------------+
 
-                   Table 2: Inteface Description Summary
+                  Table 2: Interface Description Summary
 
    The following is an example of links in the CoRE Link Format using
    these interface descriptions.  The resource hierarchy is based on a
-   simple profile defined in Appendix A.  These links are used in the
+   simple profile defined in Appendix B.  These links are used in the
    subsequent examples below.
 
    Req: GET /.well-known/core
@@ -557,12 +557,12 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
 
 
-Shelby, et al.           Expires March 17, 2017                [Page 10]
+Shelby, et al.             Expires May 1, 2017                 [Page 10]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
-5.1.  Link List
+4.1.  Link List
 
    The Link List interface is used to retrieve (GET) a list of resources
    on a web server.  The GET request SHOULD contain an Accept option
@@ -572,8 +572,8 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    application/link-format content format.
 
    _Editor's note: This use of Accept is not very clear, should probably
-   explain this is due to this interface type being extended by Batch
-   and Linked Batch later._
+   explain this is due to this interface description being extended by
+   Batch and Linked Batch later._
 
    The request returns a list of URI references with absolute paths to
    the resources as defined in CoRE Link Format.  This interface is
@@ -593,11 +593,11 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    </d/name>;rt="simple.dev.n";if="core.p",
    </d/model>;rt="simple.dev.mdl";if="core.rp"
 
-5.2.  Batch
+4.2.  Batch
 
    The Batch interface is used to manipulate a collection of sub-
-   resources at the same time.  The Batch interface type supports the
-   same methods as its sub-resources, and can be used to read (GET),
+   resources at the same time.  The Batch interface description supports
+   the same methods as its sub-resources, and can be used to read (GET),
    update (PUT) or apply (POST) the values of those sub-resource with a
    single resource representation.  The sub-resources of a Batch MAY be
    heterogeneous, a method used on the Batch only applies to sub-
@@ -613,9 +613,9 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
 
 
-Shelby, et al.           Expires March 17, 2017                [Page 11]
+Shelby, et al.             Expires May 1, 2017                 [Page 11]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
    _Editor's note: hould probably explain that this means doing a GET
@@ -633,7 +633,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
        { "n": "humidity", "v": 80, "u": "%RH" }],
    }
 
-5.3.  Linked Batch
+4.3.  Linked Batch
 
    The Linked Batch interface is an extension of the Batch interface.
    Contrary to the basic Batch which is a collection statically defined
@@ -669,9 +669,9 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
 
 
-Shelby, et al.           Expires March 17, 2017                [Page 12]
+Shelby, et al.             Expires May 1, 2017                 [Page 12]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
    Req: POST /l/ (Content-Format: application/link-format)
@@ -704,7 +704,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    Req: DELETE /l/
    Res: 2.02 Deleted
 
-5.4.  Sensor
+4.4.  Sensor
 
    The Sensor interface allows the value of a sensor resource to be read
    (GET).  The Media type of the resource can be either plain text or
@@ -725,9 +725,9 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
 
 
-Shelby, et al.           Expires March 17, 2017                [Page 13]
+Shelby, et al.             Expires May 1, 2017                 [Page 13]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
    Req: GET /s/humidity (Accept: text/plain)
@@ -740,7 +740,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
        { "n": "humidity", "v": 80, "u": "%RH" }],
    }
 
-5.5.  Parameter
+4.5.  Parameter
 
    The Parameter interface allows configurable parameters and other
    information to be modeled as a resource.  The value of the parameter
@@ -758,7 +758,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    outdoor
    Res: 2.04 Changed
 
-5.6.  Read-only Parameter
+4.6.  Read-only Parameter
 
    The Read-only Parameter interface allows configuration parameters to
    be read (GET) but not updated.  Plain text or SenML Media types MAY
@@ -770,7 +770,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    Res: 2.05 Content (text/plain)
    SuperNode200
 
-5.7.  Actuator
+4.7.  Actuator
 
    The Actuator interface is used by resources that model different
    kinds of actuators (changing its value has an effect on its
@@ -781,9 +781,9 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
 
 
-Shelby, et al.           Expires March 17, 2017                [Page 14]
+Shelby, et al.             Expires May 1, 2017                 [Page 14]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
    the state of an actuator, for example to toggle between its possible
@@ -810,12 +810,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    Res: 2.05 Content (text/plain)
    0
 
-5.8.  Future Interfaces
-
-   It is expected that further interface descriptions will be defined in
-   this and other specifications.
-
-6.  Function Sets and Profiles
+5.  Function Sets and Profiles
 
    This section defines how a set of REST resources can be created
    called a function set.  A Function Set is similar to a function block
@@ -829,23 +824,25 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    An example of function sets can be found from the CoRE Resource
    Directory specification that defines REST interfaces for
    registration, group and lookup [I-D.ietf-core-resource-directory].
-   The OMA Lightweight M2M standard "[REF]" also defines a function set
-   structure called an Objects that use integer path, instance and
-   resource URI segments.  OMA Objects can be defined and then
-   registered with an OMA maintained registry "[REF]".  This section is
+
+   The OMA Lightweight M2M standard [OMA-TS-LWM2M] also defines a
+   function set structure called an Objects that use integer path,
+   instance and resource URI segments.  OMA Objects can be defined and
+   then registered with an OMA maintained registry [OMA-TS-LWM2M].  This
+   section is simply meant as a guideline for the definition of other
+   such REST interfaces, either custom or part of other specifications.
 
 
 
 
-Shelby, et al.           Expires March 17, 2017                [Page 15]
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 15]
 
-Internet-Draft       Interface Definitions for CoRE       September 2016
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
-   simply meant as a guideline for the definition of other such REST
-   interfaces, either custom or part of other specifications.
-
-6.1.  Defining a Function Set
+5.1.  Defining a Function Set
 
    In a Function Set, types of resources are defined.  Each type
    includes a human readable name, a path template, a Resource Type for
@@ -853,7 +850,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    values.  A Function Set definition may also include a field
    indicating if a sub-resource is mandatory or optional.
 
-6.1.1.  Path template
+5.1.1.  Path template
 
    A Function Set is a container resource under which its sub-resources
    are organized.  The profile defines the path to each resource of a
@@ -872,7 +869,7 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    path and the indexes are the only variable elements in a path
    template.  All other path segments should be fixed.
 
-6.1.2.  Resource Type
+5.1.2.  Resource Type
 
    Each root resource of a Function Set is assigned a Resource Type
    parameter, therefore making it possible to discover it.  Each sub-
@@ -889,23 +886,23 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    root resources and "namespace.type.subtype" for sub-resources.  This
    naming convention facilitates resource type filtering with the
    /.well-known/core resource.  However a profile could allow mixing in
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                [Page 16]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
    foreign namespace references within a Function Set to import external
    references from other object models (e.g.  SenML and UCUM).
 
-6.1.3.  Interface Description
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 16]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+5.1.3.  Interface Description
 
    The Interface Description parameter defines the REST interface for
    that type of resource.  Several base interfaces are defined in
-   Section 5 of this document.  For a given profile, the Interface
+   Section 4 of this document.  For a given profile, the Interface
    Description may be inferred from the Resource Type.  In that case the
    Interface Description MAY be elided from link descriptions of
    resource types defined in the profile, but should be included for
@@ -913,20 +910,20 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
    The root resource of a Function Set should provide a list of links to
    its sub-resources in order to offer gradual reveal of resources.  The
-   CoRE Link List interface defined in Section 5.1 offers this
+   CoRE Link List interface defined in Section 7.1 offers this
    functionality so a root resource should support this interface or a
-   derived interface like CoRE Batch (See Section 5.2).
+   derived interface like CoRE Batch (See Section 7.2).
 
-6.1.4.  Data type
+5.1.4.  Data type
 
    The Data Type field defines the type of value (and possible range)
    that is returned in response to a GET for that resource or accepted
-   with a PUT.  The interfaces defined in Section 5 make use of plain
+   with a PUT.  The interfaces defined in Section 4 make use of plain
    text and SenML Media types for the actual format of this data.  A
    profile may restrict the list of supported content formats for the
    CoRE interfaces or define new interfaces with new content types.
 
-6.2.  Discovery
+5.2.  Discovery
 
    A device conforming to a profile SHOULD make its resources
    discoverable by providing links to the resources on the path /.well-
@@ -944,22 +941,20 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    Directory using the registration interface defined in
    [I-D.ietf-core-resource-directory] if such a directory is available.
 
-
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                [Page 17]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
-6.3.  Versioning
+5.3.  Versioning
 
    A profile should track Function Set changes to avoid incompatibility
    issues.  Evolutions in a Function Set SHOULD be backward compatible.
 
-7.  Security Considerations
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 17]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+6.  Security Considerations
 
    An implementation of a client needs to be prepared to deal with
    responses to a request that differ from what is specified in this
@@ -970,30 +965,167 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    take advantage of a poorly implemented client for example to crash
    the node or perform denial of service.
 
-8.  IANA Considerations
+7.  IANA Considerations
 
-   The interface description types defined require registration.
+   This document registers the following CoRE Interface Description
+   (if=) Link Target Attribute Values.
 
-   The interface description types defined require registration.
+7.1.  Link List
 
-   _Editor's note: We need a registry for binding methods?_
+   Attribute Value:  core.ll
 
-9.  Acknowledgements
+   Description:  The Link List interface is used to retrieve a list of
+      resources on a web server.
+
+   Reference:  This document.  Note to RFC Editor - please insert the
+      appropriate RFC reference.
+
+   Notes:  None
+
+7.2.  Batch
+
+   Attribute Value:  core.b
+
+   Description: The Batch interface is used to manipulate a collection
+   of sub-resources at the same time.
+
+   Reference:  This document.  Note to RFC Editor - please insert the
+      appropriate RFC reference.
+
+   Notes:  None
+
+7.3.  Linked Batch
+
+   Attribute Value:  core.lb
+
+   Description:  The Linked Batch interface is an extension of the Batch
+      interface.  Contrary to the basic Batch which is a collection
+      statically defined by the web server, a Linked Batch is
+      dynamically controlled by a web client.
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 18]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+   Reference:  This document.  Note to RFC Editor - please insert the
+      appropriate RFC reference.
+
+   Notes:  None
+
+7.4.  Sensor
+
+   Attribute Value:  core.s
+
+   Description:  The Sensor interface allows the value of a sensor
+      resource to be read.
+
+   Reference:  This document.  Note to RFC Editor - please insert the
+      appropriate RFC reference.
+
+   Notes:  None
+
+7.5.  Parameter
+
+   Attribute Value: core.p
+
+   Description:  The Parameter interface allows configurable parameters
+      and other information to be modeled as a resource.  The value of
+      the parameter can be read or update.
+
+   Reference:  This document.  Note to RFC Editor - please insert the
+      appropriate RFC reference.
+
+   Notes:  None
+
+7.6.  Read-only parameter
+
+   Attribute Value:  core.rp
+
+   Description:  The Read-only Parameter interface allows configuration
+      parameters to be read but not updated.
+
+   Reference:  This document.  Note to RFC Editor - please insert the
+      appropriate RFC reference.
+
+   Notes:  None
+
+7.7.  Actuator
+
+   Attribute Value:  core.a
+
+   Description:  The Actuator interface is used by resources that model
+      different kinds of actuators (changing its value has an effect on
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 19]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+      its environment).  Examples of actuators include for example LEDs,
+      relays, motor controllers and light dimmers.  The current value of
+      the actuator can be read or the actuator value can be updated.  In
+      addition, this interface allows the use of POST to change the
+      state of an actuator, for example to toggle between its possible
+      values.
+
+   Reference:  This document.  Note to RFC Editor - please insert the
+      appropriate RFC reference.
+
+   Notes:  None
+
+8.  Acknowledgements
 
    Acknowledgement is given to colleagues from the SENSEI project who
    were critical in the initial development of the well-known REST
    interface concept, to members of the IPSO Alliance where further
-   requirements for interface types have been discussed, and to Szymon
-   Sasin, Cedric Chauvenet, Daniel Gavelle and Carsten Bormann who have
-   provided useful discussion and input to the concepts in this
+   requirements for interface descriptions have been discussed, and to
+   Szymon Sasin, Cedric Chauvenet, Daniel Gavelle and Carsten Bormann
+   who have provided useful discussion and input to the concepts in this
    document.
 
-10.  Changelog
+9.  Changelog
+
+   Changes from -05 to -06:
+
+   o  Updated the abstract.
+
+   o  Section 1: Updated introduction.
+
+   o  Section 2: Alphabetised the order
+
+   o  Section 2: Removed the collections definition in favour of the
+      complete definition in the collections section.
+
+   o  Removed section 3 on interfaces in favour of an updated definition
+      in section 1.3.
+
+   o  General: Changed interface type to interface description as that
+      is the term defined in RFC6690.
+
+   o  Removed section on future interfaces.
+
+   o  Section 8: Updated IANA considerations.
+
+   o  Added Appendix A to discuss current state of the art wrt to
+      collections, function sets etc.
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 20]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
 
    Changes from -04 to -05:
 
    o  Removed Link Bindings and Observe attributes.  This functionality
-      is now contained in I-D.groves-core-dynlink.
+      is now contained in I-D.ietf-core-dynlink.
 
    o  Hypermedia collections have been removed.  This is covered in a
       new T2TRG draft.
@@ -1001,14 +1133,6 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    o  The WADL description has been removed.
 
    o  Fixed minor typos.
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                [Page 18]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
 
    o  Updated references.
 
@@ -1047,6 +1171,13 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    o  Added observe-cancel definition to WADL and to observable
       interfaces.
 
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 21]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
    Changes from -01 to -02:
 
    o  Updated the date and version, fixed references.
@@ -1058,13 +1189,6 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
    o  Improvements to the Function Set section.
 
    Changes from -05 to WG Document -00
-
-
-
-Shelby, et al.           Expires March 17, 2017                [Page 19]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
 
    o  Updated the date and version.
 
@@ -1096,9 +1220,21 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
    o  Added a simple profile example.
 
-11.  References
+10.  References
 
-11.1.  Normative References
+
+
+
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 22]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1113,16 +1249,13 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
               Format", RFC 6690, DOI 10.17487/RFC6690, August 2012,
               <http://www.rfc-editor.org/info/rfc6690>.
 
+10.2.  Informative References
 
-
-
-
-Shelby, et al.           Expires March 17, 2017                [Page 20]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
-11.2.  Informative References
+   [I-D.ietf-core-dynlink]
+              Shelby, Z., Vial, M., Koster, M., and C. Groves, "Dynamic
+              Resource Linking for Constrained RESTful Environments",
+              draft-ietf-core-dynlink-00 (work in progress), October
+              2016.
 
    [I-D.ietf-core-resource-directory]
               Shelby, Z., Koster, M., Bormann, C., and P. Stok, "CoRE
@@ -1134,14 +1267,55 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
               Bormann, "Media Types for Sensor Markup Language (SenML)",
               draft-ietf-core-senml-03 (work in progress), October 2016.
 
+   [OIC-Core]
+              "OIC Resource Type Specification v1.1.0", 2016,
+              <https://openconnectivity.org/resources/specifications>.
+
+   [OIC-SmartHome]
+              "OIC Smart Home Device Specification v1.1.0", 2016,
+              <https://openconnectivity.org/resources/specifications>.
+
+   [OMA-TS-LWM2M]
+              "Lightweight Machine to Machine Technical Specification",
+              2016, <http://technical.openmobilealliance.org/Technical/
+              technical-information/release-program/current-releases/
+              oma-lightweightm2m-v1-0>.
+
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 23]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+   [oneM2MTS0008]
+              "TS 0008 v1.3.2 CoAP Protocol Binding", 2016,
+              <http://www.onem2m.org/technical/published-documents>.
+
+   [oneM2MTS0023]
+              "TS 0023 v2.0.0 Home Appliances Information Model and
+              Mapping", 2016,
+              <http://www.onem2m.org/technical/published-documents>.
+
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
               <http://www.rfc-editor.org/info/rfc3986>.
 
+   [RFC6573]  Amundsen, M., "The Item and Collection Link Relations",
+              RFC 6573, DOI 10.17487/RFC6573, April 2012,
+              <http://www.rfc-editor.org/info/rfc6573>.
+
    [RFC6763]  Cheshire, S. and M. Krochmal, "DNS-Based Service
               Discovery", RFC 6763, DOI 10.17487/RFC6763, February 2013,
               <http://www.rfc-editor.org/info/rfc6763>.
+
+   [RFC7230]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
+              Protocol (HTTP/1.1): Message Syntax and Routing",
+              RFC 7230, DOI 10.17487/RFC7230, June 2014,
+              <http://www.rfc-editor.org/info/rfc7230>.
 
    [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
               Application Protocol (CoAP)", RFC 7252,
@@ -1152,7 +1326,149 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
               DOI 10.17487/RFC7396, October 2014,
               <http://www.rfc-editor.org/info/rfc7396>.
 
-Appendix A.  Profile example
+Appendix A.  Current Usage of Interfaces and Function Sets
+
+   This appendix analyses the current landscape with regards the
+   definition and use of collections, interfaces and function sets/
+   profiles.  This should be considered when considering the scope of
+   this document.
+
+   In summary it can be seen that there is a lack of consistancy of the
+   definition and usage of interface description and function sets.
+
+
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 24]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+A.1.  Constrained RESTful Environments (CoRE) Link Format (IETF)
+
+   [RFC6690] assumes that different deployments or application domains
+   will define the appropriate REST Interface Descriptions along with
+   Resource Types to make discovery meaningful.  It highlights that
+   collections are often used for these interfaces.
+
+   Whilst 3.2/[RFC6690] defines a new Interface Description 'if'
+   attribute the procedures around it are about the naming of the
+   interface not what information should be included in the
+   documentation about the interface.
+
+   Function sets are not discussed.
+
+A.2.  CoRE Resource Directory (IETF)
+
+   [I-D.ietf-core-resource-directory] uses the concepts of collections,
+   interfaces and function sets.
+
+   If defines a number of interfaces: discovery, registration,
+   registration update, registration removal, read endpoint links,
+   update endpoint links, registration request interface, removal
+   request interface and lookup interface.  However it does not assign
+   an inteface description identifier (if=) to these interfaces.
+
+   It does define a resource directory function set which specifies
+   relevant content formats and interfaces to be used between a resource
+   directory and endpoints.  However it does not follow the format
+   proposed by this document.
+
+A.3.  Open Connectivity Foundation (OCF)
+
+   The OIC Core Specification [OIC-Core] most closely aligns with the
+   work in this specification.  It makes use of interface descriptions
+   as per [RFC6690] and has registered several interface identifiers
+   (https://www.iana.org/assignments/core-parameters/core-
+   parameters.xhtml#if-link-target-att-value).  These interface
+   descriptors are similar to those defined in this specification.  From
+   a high level perspective:
+
+   links list:   OCF (oic.if.ll) -> IETF (core.ll)
+                 Note: it's called "link list" in the IETF.
+   linked batch: OCF (oic.if.b) -> IETF (core.lb)
+   read-only:    OCF (oic.if.r) -> IETF (core.rp)
+   read-write:   OCF (oic.if.rw) -> IETF (core.p)
+   actuator:     OCF (oic.if.a) -> IETF (core.a)
+   sensor:       OCF (oic.if.s) -> IETF (core.s)
+   batch:        No OCF equivalent -> IETF (core.b)
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 25]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+   Some of the OCF interfaces make use of collections.
+
+   The OIC Core specification does not use the concept of function sets.
+   It does however discuss the concept of profiles.  The OCF defines two
+   sets of documents.  The core specification documents such as
+   [OIC-Core] and vertical profile specification documents which provide
+   specific information for specific applications.  The OIC Smart Home
+   Device Specification [OIC-SmartHome] is one such specification.  It
+   provides information on the resource model, discovery and data types.
+
+A.4.  oneM2M
+
+   OneM2M describes a technology independent functional architecture
+   [oneM2MTS0023].  In this archictecture the reference points between
+   functional entities are called "interfaces".  This usage does not
+   match the [RFC6690] concept of interfaces.  A more direct comparison
+   is that of 10.2/[oneM2MTS0023] that defines basic procedures and
+   resource type-specific procedures utilising REST type create,
+   retrieve, update, delete, notify actions.
+
+   [oneM2MTS0023] does not refer to resource collections however does
+   define "Group Management Procedures" in 10.2.7/[oneM2MTS0023].  It
+   does allow bulk management of member resources.
+
+   [oneM2MTS0023] does not use the term "function set". [oneM2MTS0008]
+   describes the binding with the CoAP protocol.  In some respects this
+   document provides a profile of the CoAP protocol in terms of the
+   protocol elements that need to be supported.  However it does not
+   define any interface descriptions nor collections.
+
+A.5.  OMA LWM2M
+
+   [OMA-TS-LWM2M] utilises the concept of interfaces.  It defines the
+   following interfaces: Bootstrap, Client Registration, Device
+   Management and Service Enablement and Information Reporting.  It
+   defines that these have a particular direction (Uplink/Downlink) and
+   indicates the operations that may be applied to the interface (i.e.
+   Request Bootstrap, Write, Delete, Register, Update, De-Register,
+   Create, Read, Write, Delete, Execute, Write Attributes, Discover,
+   Observe, Cancel Observation, Notify).  It then further defines which
+   objects may occur over the interface.  In 6/[OMA-TS-LWM2M] resource
+   model, identifier and data formats are described.
+
+   Whilst it does not formally describe the use of "collections" the use
+   of a multiple resource TLV allows a hierarchy of resource/sub-
+   resource.
+
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 26]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
+
+   It does not identify the interfaces through an Interface Description
+   (if=) attribute.
+
+   It does not use the term function set.  Informally the specification
+   could be considered as a function set.
+
+   Note: It refers to draft-ietf-core-interfaces-00.  It also makes use
+   of the binding/observation attributes from draft-ietf-dynlink-00 but
+   does not refer to that document.
+
+Appendix B.  Profile example
 
    The following is a short definition of simple profile.  This
    simplistic profile is for use in the examples of this document.
@@ -1169,15 +1485,6 @@ Appendix A.  Profile example
 
                       Table 3: List of Function Sets
 
-
-
-
-
-Shelby, et al.           Expires March 17, 2017                [Page 21]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
        +-------+----------+----------------+---------+------------+
        | Type  | Path     | RT             | IF      | Data Type  |
        +-------+----------+----------------+---------+------------+
@@ -1187,6 +1494,25 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
        +-------+----------+----------------+---------+------------+
 
                  Table 4: Device Description Function Set
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 27]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
+
 
    +-------------+-------------+----------------+--------+-------------+
    | Type        | Path        | RT             | IF     | Data Type   |
@@ -1226,14 +1552,6 @@ Authors' Addresses
    Email: zach.shelby@arm.com
 
 
-
-
-
-Shelby, et al.           Expires March 17, 2017                [Page 22]
-
-Internet-Draft       Interface Definitions for CoRE       September 2016
-
-
    Matthieu Vial
    Schneider-Electric
    Grenoble
@@ -1241,6 +1559,15 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
    Phone: +33 (0)47657 6522
    Email: matthieu.vial@schneider-electric.com
+
+
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 28]
+
+Internet-Draft       Interface Definitions for CoRE         October 2016
 
 
    Michael Koster
@@ -1285,4 +1612,13 @@ Internet-Draft       Interface Definitions for CoRE       September 2016
 
 
 
-Shelby, et al.           Expires March 17, 2017                [Page 23]
+
+
+
+
+
+
+
+
+
+Shelby, et al.             Expires May 1, 2017                 [Page 29]
