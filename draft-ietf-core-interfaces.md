@@ -2,7 +2,7 @@
 title: "Reusable Interface Definitions for Constrained RESTful Environments"
 abbrev: Interface Definitions for CoRE
 docname: draft-ietf-core-interfaces-latest
-date: 2016-10-28
+date: 2016-12-21
 category: info
 
 ipr: trust200902
@@ -116,9 +116,7 @@ An interface description describes a resource in terms of it's associated conten
 
 A set of collection types is defined for organizing resources for discovery, and for various forms of bulk interaction with resource sets using typed embedding links. 
 
-Interface descriptions may be used in the composition of Function Sets and Profiles. Function Sets and Profiles are described and an example is given of a sensor and actuator device profile using Function Sets composed from the interface descriptions described in this document.
-
-This document first defines the concept of collection interface descriptions. It then defines a number of generic interface descriptions that may be used in contrained environments. Several of these interface descriptions utilise collections. The interface descriptions are then used by the function sets.
+This document first defines the concept of collection interface descriptions. It then defines a number of generic interface descriptions that may be used in contrained environments. Several of these interface descriptions utilise collections. 
 
 Whilst this document assumes the use of CoAP {{RFC7252}}, the REST interfaces described can also be realized using HTTP {{RFC7230}}.
 
@@ -128,20 +126,11 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",   "SHOULD", 
 
 This document requires readers to be familiar with all the terms and concepts that are discussed in {{RFC5988}} and {{RFC6690}}. This document makes use of the following additional terminology:
 
-Device:
-: An IP smart object running a web server that hosts a group of Function Set instances from a profile.
-
-Function Set:
-: A group of well-known REST resources that provides a particular service.
-
 Gradual Reveal:
 : A REST design where resources are discovered progressively using Web Linking.
 
 Interface Description:
 : The Interface Description describes the generic REST interface to interact with a resource or a set of resources. Its use is described via the Interface Description 'if' attribute which is an opaque string used to provide a name or URI indicating a specific interface definition used to interact with the target resource.  One can think of this as describing verbs usable on a resource. 
-
-Profile:
-: A group of well-known Function Sets defined by a specification.
 
 Resource Discovery:
 : The process allowing a web client to identify resources being hosted on a web server.
@@ -264,15 +253,15 @@ The Methods column defines the methods supported by that interface, which are de
 |              |         |                 | text/plain         |
 {: #intdesc title="Interface Description Summary"}
 
-The following is an example of links in the CoRE Link Format using these interface descriptions. The resource hierarchy is based on a simple profile defined in {{simple-profile}}. These links are used in the subsequent examples below.
+The following is an example of links in the CoRE Link Format using these interface descriptions. The resource hierarchy is based on a simple resource profile defined in {{simple-profile}}. These links are used in the subsequent examples below.
 
 ~~~~
 Req: GET /.well-known/core
 Res: 2.05 Content (application/link-format)
 </s/>;rt="simple.sen";if="core.b",
-</s/lt>;rt="simple.sen.lt";if="core.s",
-</s/tmp>;rt="simple.sen.tmp";if="core.s";obs,
-</s/hum>;rt="simple.sen.hum";if="core.s",
+</s/light>;rt="simple.sen.lt";if="core.s",
+</s/temp>;rt="simple.sen.tmp";if="core.s";obs,
+</s/humidity>;rt="simple.sen.hum";if="core.s",
 </a/>;rt="simple.act";if="core.b",
 </a/1/led>;rt="simple.act.led";if="core.a",
 </a/2/led>;rt="simple.act.led";if="core.a",
@@ -304,9 +293,7 @@ Batch         {#hbatch}
 -----
 The Batch interface is used to manipulate a collection of sub-resources at the same time. The Batch interface description supports the same methods as its sub-resources, and can be used to read (GET), update (PUT) or apply (POST) the values of those sub-resource with a single resource representation. The sub-resources of a Batch MAY be heterogeneous, a method used on the Batch only applies to sub-resources that support it. For example Sensor interfaces do not support PUT, and thus a PUT request to a Sensor member of that Batch would be ignored. A batch requires the use of SenML Media types in order to support multiple sub-resources.
 
-In addition, The Batch interface is an extension of the Link List interface and in consequence MUST support the same methods.
-
-*Editor's note: hould probably explain that this means doing a GET with an Accept:application/link-format will return the sub-resource links*
+In addition, the Batch interface is an extension of the Link List interface and in consequence MUST support the same methods. For example: a GET with an Accept:application/link-format on a resource utilizing the batch interface will return the sub-resource links.
 
 The following example interacts with a Batch /s/ with Sensor sub-resources /s/light, /s/temp and /s/humidity.
 
@@ -427,53 +414,6 @@ Res: 2.05 Content (text/plain)
 0
 ~~~~
 
-Function Sets and Profiles      {#function-set}
-==========================
-This section defines how a set of REST resources can be created called a function set. A Function Set is similar to a function block in the sense that it consists of input, output and parameter resources and contains internal logic. A Function Set can have a subset of mandatory inputs, outputs and parameters to provide minimum interoperability. It can also be extended with manufacturer/user-specific resources. A device is composed of one or more Function Set instances.
-
-An example of function sets can be found from the CoRE Resource Directory specification that defines REST interfaces for registration, group and lookup {{I-D.ietf-core-resource-directory}}. 
-
-The OMA Lightweight M2M standard {{OMA-TS-LWM2M}} also defines a function set structure called an Objects that use integer path, instance and resource URI segments. OMA Objects can be defined and then registered with an OMA maintained registry {{OMA-TS-LWM2M}}. This section is simply meant as a guideline for the definition of other such REST interfaces, either custom or part of other specifications.
-
-Defining a Function Set       {#definition}
------------------------
-In a Function Set, types of resources are defined. Each type includes a human readable name, a path template, a Resource Type for discovery, the Interface Definition and the data type and allowed values. A Function Set definition may also include a field indicating if a sub-resource is mandatory or optional.
-
-### Path template            {#path-template}
-
-A Function Set is a container resource under which its sub-resources are organized. The profile defines the path to each resource of a Function Set in a path template. The template can contain either relative paths or absolute paths depending on the profile needs. An absolute Function Set should be located at its recommended root path on a web server, however it can be located under an alternative path if necessary (for example multi-purpose devices, gateways etc.). A relative Function Set can be instantiated as many times as needed on a web server with an arbitrary root path. However some Function Sets (e.g. device description) only make sense as singletons.
-
-The path template includes a possible index {#} parameter, and possible fixed path segments.  The index {#} allows for multiple instances of this type of resource, and can be any string. The root path and the indexes are the only variable elements in a path template. All other path segments should be fixed.
-
-### Resource Type           {#resource-type}
-
-Each root resource of a Function Set is assigned a Resource Type parameter, therefore making it possible to discover it. Each sub-resource of a Function Set is also assigned a Resource Type parameter. This Resource Type is used for resource discovery and is usually necessary to discover optional resources supported on a specific device. The Resource Type of a Function Set may also be used for service discovery and can be exported to DNS-SD {{RFC6763}} for example.
-
-The Resource Type parameter defines the value that should be included in the rt= field of the CoRE Link Format when describing a link to this resource. The value SHOULD be in the form &quot;namespace.type&quot; for root resources and &quot;namespace.type.subtype&quot; for sub-resources. This naming convention facilitates resource type filtering with the /.well-known/core resource. However a profile could allow mixing in foreign namespace references within a Function Set to import external references from other object models (e.g. SenML and UCUM).
-
-### Interface Description      {#interface-description}
-
-The Interface Description parameter defines the REST interface for that type of resource. Several base interfaces are defined in {{interfaces}} of this document. For a given profile, the Interface Description may be inferred from the Resource Type. In that case the Interface Description MAY be elided from link descriptions of resource types defined in the profile, but should be included for custom extensions to the profile.
-
-The root resource of a Function Set should provide a list of links to its sub-resources in order to offer gradual reveal of resources. The CoRE Link List interface defined in {{link-list}} offers this functionality so a root resource should support this interface or a derived interface like CoRE Batch (See {{batch}}).
-
-### Data type                 {#data-type}
-
-The Data Type field defines the type of value (and possible range) that is returned in response to a GET for that resource or accepted with a PUT. The interfaces defined in {{interfaces}} make use of plain text and SenML Media types for the actual format of this data. A profile may restrict the list of supported content formats for the CoRE interfaces or define new interfaces with new content types.
-
-Discovery           {#discovery}
----------
-
-A device conforming to a profile SHOULD make its resources discoverable by providing links to the resources on the path /.well-known/core as defined in {{RFC6690}}. All resources hosted on a device SHOULD be discoverable either with a direct link in /.well-known/core or by following successive links starting from /.well-known/core.
-
-The root path of a Function Set instance SHOULD be directly referenced in /.well-known/core in order to offer discovery at the first discovery stage. A device with more than 10 individual resources SHOULD only expose Function Set instances in /.well-known/core to limit the size of this resource.
-
-In addition, a device MAY register its resources to a Resource Directory using the registration interface defined in {{I-D.ietf-core-resource-directory}} if such a directory is available.
-
-Versioning          {#versioning}
-----------
-A profile should track Function Set changes to avoid incompatibility issues. Evolutions in a Function Set SHOULD be backward compatible.
-
 
 Security Considerations   {#Security}
 =======================
@@ -593,6 +533,14 @@ Acknowledgement is given to colleagues from the SENSEI project who were critical
 
 Changelog
 =========
+Changes from -06 to 07:
+
+* Corrected {{figbindexp}} sub-resource names e.g. tmp to temp and hum to humidity.
+
+* Addressed the editor's note in {{hbatch}}.
+
+* Removed section on function sets and profiles as agreed to at the IETF#97.
+
 Changes from -05 to -06:
 
 * Updated the abstract.
@@ -704,6 +652,8 @@ Changes from -01 to -02
 Current Usage of Interfaces and Function Sets
 =============================================
 
+Editor's note: This appendix will be removed. It is only included for information.
+
 This appendix analyses the current landscape with regards the definition and use of collections, interfaces and function sets/profiles. This should be considered when considering the scope of this document.
 
 In summary it can be seen that there is a lack of consistancy of the definition and usage of interface description and function sets. 
@@ -770,20 +720,20 @@ It does not use the term function set. Informally the specification could be con
 
 Note: It refers to draft-ietf-core-interfaces-00. It also makes use of the binding/observation attributes from draft-ietf-dynlink-00 but does not refer to that document. 
 
-Profile example          {#simple-profile}
+Resource Profile example          {#simple-profile}
 ===============
-The following is a short definition of simple profile. This simplistic profile is for use in the examples of this document.
+The following is a short definition of simple device resource profile. This simplistic profile is for use in the examples of this document.
 
-|       Function Set | Root Path | RT         | IF      |
+|       Functions    | Root Path | RT         | IF      |
 | Device Description | /d        | simple.dev | core.ll |
 |            Sensors | /s        | simple.sen | core.b  |
 |          Actuators | /a        | simple.act | core.b  |
-{: #tablistfs title="List of Function Sets"}
+{: #tablistfs title="Functional list of resources"}
 
 |  Type | Path     | RT             | IF      | Data Type  |
 |  Name | /d/name  | simple.dev.n   | core.p  | xsd:string |
 | Model | /d/model | simple.dev.mdl | core.rp | xsd:string |
-{: #tabddfs title="Device Description Function Set"}
+{: #tabddfs title="Device Description Resources"}
 
 |        Type | Path        | RT             | IF     | Data Type   |
 |       Light | /s/light    | simple.sen.lt  | core.s | xsd:decimal |
@@ -792,9 +742,9 @@ The following is a short definition of simple profile. This simplistic profile i
 |             |             |                |        | (%RH)       |
 | Temperature | /s/temp     | simple.sen.tmp | core.s | xsd:decimal |
 |             |             |                |        | (degC)      |
-{: #tabsfs title="Sensors Function Set"}
+{: #tabsfs title="Sensor Resources"}
 
 | Type | Path       | RT             | IF     | Data Type   |
 |  LED | /a/{#}/led | simple.act.led | core.a | xsd:boolean |
-{: #tabafs title="Actuators Function Set"}
+{: #tabafs title="Actuator Resources"}
 
