@@ -286,35 +286,27 @@ li, p {
 <link href="#rfc.section.4.5" rel="Chapter" title="4.5 Parameter"/>
 <link href="#rfc.section.4.6" rel="Chapter" title="4.6 Read-only Parameter"/>
 <link href="#rfc.section.4.7" rel="Chapter" title="4.7 Actuator"/>
-<link href="#rfc.section.5" rel="Chapter" title="5 Function Sets and Profiles"/>
-<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Defining a Function Set"/>
-<link href="#rfc.section.5.1.1" rel="Chapter" title="5.1.1 Path template"/>
-<link href="#rfc.section.5.1.2" rel="Chapter" title="5.1.2 Resource Type"/>
-<link href="#rfc.section.5.1.3" rel="Chapter" title="5.1.3 Interface Description"/>
-<link href="#rfc.section.5.1.4" rel="Chapter" title="5.1.4 Data type"/>
-<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Discovery"/>
-<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Versioning"/>
-<link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations"/>
-<link href="#rfc.section.7" rel="Chapter" title="7 IANA Considerations"/>
-<link href="#rfc.section.7.1" rel="Chapter" title="7.1 Link List"/>
-<link href="#rfc.section.7.2" rel="Chapter" title="7.2 Batch"/>
-<link href="#rfc.section.7.3" rel="Chapter" title="7.3 Linked Batch"/>
-<link href="#rfc.section.7.4" rel="Chapter" title="7.4 Sensor"/>
-<link href="#rfc.section.7.5" rel="Chapter" title="7.5 Parameter"/>
-<link href="#rfc.section.7.6" rel="Chapter" title="7.6 Read-only parameter"/>
-<link href="#rfc.section.7.7" rel="Chapter" title="7.7 Actuator"/>
-<link href="#rfc.section.8" rel="Chapter" title="8 Acknowledgements"/>
-<link href="#rfc.section.9" rel="Chapter" title="9 Changelog"/>
-<link href="#rfc.references" rel="Chapter" title="10 References"/>
-<link href="#rfc.references.1" rel="Chapter" title="10.1 Normative References"/>
-<link href="#rfc.references.2" rel="Chapter" title="10.2 Informative References"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 Security Considerations"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations"/>
+<link href="#rfc.section.6.1" rel="Chapter" title="6.1 Link List"/>
+<link href="#rfc.section.6.2" rel="Chapter" title="6.2 Batch"/>
+<link href="#rfc.section.6.3" rel="Chapter" title="6.3 Linked Batch"/>
+<link href="#rfc.section.6.4" rel="Chapter" title="6.4 Sensor"/>
+<link href="#rfc.section.6.5" rel="Chapter" title="6.5 Parameter"/>
+<link href="#rfc.section.6.6" rel="Chapter" title="6.6 Read-only parameter"/>
+<link href="#rfc.section.6.7" rel="Chapter" title="6.7 Actuator"/>
+<link href="#rfc.section.7" rel="Chapter" title="7 Acknowledgements"/>
+<link href="#rfc.section.8" rel="Chapter" title="8 Changelog"/>
+<link href="#rfc.references" rel="Chapter" title="9 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="9.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="9.2 Informative References"/>
 <link href="#rfc.appendix.A" rel="Chapter" title="A Current Usage of Interfaces and Function Sets"/>
 <link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 Constrained RESTful Environments (CoRE) Link Format (IETF)"/>
 <link href="#rfc.appendix.A.2" rel="Chapter" title="A.2 CoRE Resource Directory  (IETF)"/>
 <link href="#rfc.appendix.A.3" rel="Chapter" title="A.3 Open Connectivity Foundation (OCF)"/>
 <link href="#rfc.appendix.A.4" rel="Chapter" title="A.4 oneM2M"/>
 <link href="#rfc.appendix.A.5" rel="Chapter" title="A.5 OMA LWM2M"/>
-<link href="#rfc.appendix.B" rel="Chapter" title="B Profile example"/>
+<link href="#rfc.appendix.B" rel="Chapter" title="B Resource Profile example"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -323,7 +315,7 @@ li, p {
 
   <meta name="dct.creator" content="Shelby, Z., Vial, Z., Koster, M., and C. Groves" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-core-interfaces-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-10-28" />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-12-21" />
   <meta name="dct.abstract" content="This document defines a set of Constrained RESTful Environments (CoRE) Link Format Interface Descriptions " />
   <meta name="description" content="This document defines a set of Constrained RESTful Environments (CoRE) Link Format Interface Descriptions " />
 
@@ -347,7 +339,7 @@ li, p {
   <td class="right">Z. Vial</td>
 </tr>
 <tr>
-  <td class="left">Expires: May 1, 2017</td>
+  <td class="left">Expires: June 24, 2017</td>
   <td class="right">Schneider-Electric</td>
 </tr>
 <tr>
@@ -368,7 +360,7 @@ li, p {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">October 28, 2016</td>
+  <td class="right">December 21, 2016</td>
 </tr>
 
     	
@@ -393,7 +385,7 @@ li, p {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 1, 2017.</p>
+<p>This Internet-Draft will expire on June 24, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -423,35 +415,27 @@ li, p {
 <li>4.5.   <a href="#rfc.section.4.5">Parameter</a></li>
 <li>4.6.   <a href="#rfc.section.4.6">Read-only Parameter</a></li>
 <li>4.7.   <a href="#rfc.section.4.7">Actuator</a></li>
-</ul><li>5.   <a href="#rfc.section.5">Function Sets and Profiles</a></li>
-<ul><li>5.1.   <a href="#rfc.section.5.1">Defining a Function Set</a></li>
-<ul><li>5.1.1.   <a href="#rfc.section.5.1.1">Path template</a></li>
-<li>5.1.2.   <a href="#rfc.section.5.1.2">Resource Type</a></li>
-<li>5.1.3.   <a href="#rfc.section.5.1.3">Interface Description</a></li>
-<li>5.1.4.   <a href="#rfc.section.5.1.4">Data type</a></li>
-</ul><li>5.2.   <a href="#rfc.section.5.2">Discovery</a></li>
-<li>5.3.   <a href="#rfc.section.5.3">Versioning</a></li>
-</ul><li>6.   <a href="#rfc.section.6">Security Considerations</a></li>
-<li>7.   <a href="#rfc.section.7">IANA Considerations</a></li>
-<ul><li>7.1.   <a href="#rfc.section.7.1">Link List</a></li>
-<li>7.2.   <a href="#rfc.section.7.2">Batch</a></li>
-<li>7.3.   <a href="#rfc.section.7.3">Linked Batch</a></li>
-<li>7.4.   <a href="#rfc.section.7.4">Sensor</a></li>
-<li>7.5.   <a href="#rfc.section.7.5">Parameter</a></li>
-<li>7.6.   <a href="#rfc.section.7.6">Read-only parameter</a></li>
-<li>7.7.   <a href="#rfc.section.7.7">Actuator</a></li>
-</ul><li>8.   <a href="#rfc.section.8">Acknowledgements</a></li>
-<li>9.   <a href="#rfc.section.9">Changelog</a></li>
-<li>10.   <a href="#rfc.references">References</a></li>
-<ul><li>10.1.   <a href="#rfc.references.1">Normative References</a></li>
-<li>10.2.   <a href="#rfc.references.2">Informative References</a></li>
+</ul><li>5.   <a href="#rfc.section.5">Security Considerations</a></li>
+<li>6.   <a href="#rfc.section.6">IANA Considerations</a></li>
+<ul><li>6.1.   <a href="#rfc.section.6.1">Link List</a></li>
+<li>6.2.   <a href="#rfc.section.6.2">Batch</a></li>
+<li>6.3.   <a href="#rfc.section.6.3">Linked Batch</a></li>
+<li>6.4.   <a href="#rfc.section.6.4">Sensor</a></li>
+<li>6.5.   <a href="#rfc.section.6.5">Parameter</a></li>
+<li>6.6.   <a href="#rfc.section.6.6">Read-only parameter</a></li>
+<li>6.7.   <a href="#rfc.section.6.7">Actuator</a></li>
+</ul><li>7.   <a href="#rfc.section.7">Acknowledgements</a></li>
+<li>8.   <a href="#rfc.section.8">Changelog</a></li>
+<li>9.   <a href="#rfc.references">References</a></li>
+<ul><li>9.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>9.2.   <a href="#rfc.references.2">Informative References</a></li>
 </ul><li>Appendix A.   <a href="#rfc.appendix.A">Current Usage of Interfaces and Function Sets</a></li>
 <ul><li>A.1.   <a href="#rfc.appendix.A.1">Constrained RESTful Environments (CoRE) Link Format (IETF)</a></li>
 <li>A.2.   <a href="#rfc.appendix.A.2">CoRE Resource Directory  (IETF)</a></li>
 <li>A.3.   <a href="#rfc.appendix.A.3">Open Connectivity Foundation (OCF)</a></li>
 <li>A.4.   <a href="#rfc.appendix.A.4">oneM2M</a></li>
 <li>A.5.   <a href="#rfc.appendix.A.5">OMA LWM2M</a></li>
-</ul><li>Appendix B.   <a href="#rfc.appendix.B">Profile example</a></li>
+</ul><li>Appendix B.   <a href="#rfc.appendix.B">Resource Profile example</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
@@ -463,25 +447,18 @@ li, p {
 <p id="rfc.section.1.p.3">This document defines a set of Link Format interface descriptions for some common design patterns that enable the server side composition and organization, and client side discovery and consumption, of machine resources using Web Linking. A client discovering the &#8220;if&#8221; link attribute will be able to consume resources based on its knowledge of the expected interface types. In this sense the Interface Type acts in a similar way as a Content-Format, but as a selector for a high level functional abstraction.</p>
 <p id="rfc.section.1.p.4">An interface description describes a resource in terms of it&#8217;s associated content formats, data types, URI templates, REST methods, parameters, and responses. Basic interface descriptions are defined for sensors, actuators, and properties.</p>
 <p id="rfc.section.1.p.5">A set of collection types is defined for organizing resources for discovery, and for various forms of bulk interaction with resource sets using typed embedding links.</p>
-<p id="rfc.section.1.p.6">Interface descriptions may be used in the composition of Function Sets and Profiles. Function Sets and Profiles are described and an example is given of a sensor and actuator device profile using Function Sets composed from the interface descriptions described in this document.</p>
-<p id="rfc.section.1.p.7">This document first defines the concept of collection interface descriptions. It then defines a number of generic interface descriptions that may be used in contrained environments. Several of these interface descriptions utilise collections. The interface descriptions are then used by the function sets.</p>
-<p id="rfc.section.1.p.8">Whilst this document assumes the use of CoAP <a href="#RFC7252">[RFC7252]</a>, the REST interfaces described can also be realized using HTTP <a href="#RFC7230">[RFC7230]</a>.</p>
+<p id="rfc.section.1.p.6">This document first defines the concept of collection interface descriptions. It then defines a number of generic interface descriptions that may be used in contrained environments. Several of these interface descriptions utilise collections.</p>
+<p id="rfc.section.1.p.7">Whilst this document assumes the use of CoAP <a href="#RFC7252">[RFC7252]</a>, the REST interfaces described can also be realized using HTTP <a href="#RFC7230">[RFC7230]</a>.</p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#reqlang" id="reqlang">Terminology</a></h1>
 <p id="rfc.section.2.p.1">The key words &#8220;MUST&#8221;, &#8220;MUST NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;, &#8220;SHALL NOT&#8221;,   &#8220;SHOULD&#8221;, &#8220;SHOULD NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;NOT RECOMMENDED&#8221;, &#8220;MAY&#8221;, and &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in <a href="#RFC2119">[RFC2119]</a>.</p>
 <p id="rfc.section.2.p.2">This document requires readers to be familiar with all the terms and concepts that are discussed in <a href="#RFC5988">[RFC5988]</a> and <a href="#RFC6690">[RFC6690]</a>. This document makes use of the following additional terminology:</p>
 <p/>
 
 <dl>
-  <dt>Device:</dt>
-  <dd style="margin-left: 8">An IP smart object running a web server that hosts a group of Function Set instances from a profile.</dd>
-  <dt>Function Set:</dt>
-  <dd style="margin-left: 8">A group of well-known REST resources that provides a particular service.</dd>
   <dt>Gradual Reveal:</dt>
   <dd style="margin-left: 8">A REST design where resources are discovered progressively using Web Linking.</dd>
   <dt>Interface Description:</dt>
   <dd style="margin-left: 8">The Interface Description describes the generic REST interface to interact with a resource or a set of resources. Its use is described via the Interface Description &#8216;if&#8217; attribute which is an opaque string used to provide a name or URI indicating a specific interface definition used to interact with the target resource.  One can think of this as describing verbs usable on a resource.</dd>
-  <dt>Profile:</dt>
-  <dd style="margin-left: 8">A group of well-known Function Sets defined by a specification.</dd>
   <dt>Resource Discovery:</dt>
   <dd style="margin-left: 8">The process allowing a web client to identify resources being hosted on a web server.</dd>
   <dt>Service Discovery:</dt>
@@ -662,16 +639,16 @@ li, p {
     </tr>
   </tbody>
 </table>
-<p id="rfc.section.4.p.4">The following is an example of links in the CoRE Link Format using these interface descriptions. The resource hierarchy is based on a simple profile defined in <a href="#simple-profile">Appendix B</a>. These links are used in the subsequent examples below.</p>
+<p id="rfc.section.4.p.4">The following is an example of links in the CoRE Link Format using these interface descriptions. The resource hierarchy is based on a simple resource profile defined in <a href="#simple-profile">Appendix B</a>. These links are used in the subsequent examples below.</p>
 <div id="rfc.figure.1"/>
 <div id="figbindexp"/>
 <pre>
 Req: GET /.well-known/core
 Res: 2.05 Content (application/link-format)
 &lt;/s/&gt;;rt="simple.sen";if="core.b",
-&lt;/s/lt&gt;;rt="simple.sen.lt";if="core.s",
-&lt;/s/tmp&gt;;rt="simple.sen.tmp";if="core.s";obs,
-&lt;/s/hum&gt;;rt="simple.sen.hum";if="core.s",
+&lt;/s/light&gt;;rt="simple.sen.lt";if="core.s",
+&lt;/s/temp&gt;;rt="simple.sen.tmp";if="core.s";obs,
+&lt;/s/humidity&gt;;rt="simple.sen.hum";if="core.s",
 &lt;/a/&gt;;rt="simple.act";if="core.b",
 &lt;/a/1/led&gt;;rt="simple.act.led";if="core.a",
 &lt;/a/2/led&gt;;rt="simple.act.led";if="core.a",
@@ -695,11 +672,8 @@ Res: 2.05 Content (application/link-format)
 </pre>
 <h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> <a href="#hbatch" id="hbatch">Batch</a></h1>
 <p id="rfc.section.4.2.p.1">The Batch interface is used to manipulate a collection of sub-resources at the same time. The Batch interface description supports the same methods as its sub-resources, and can be used to read (GET), update (PUT) or apply (POST) the values of those sub-resource with a single resource representation. The sub-resources of a Batch MAY be heterogeneous, a method used on the Batch only applies to sub-resources that support it. For example Sensor interfaces do not support PUT, and thus a PUT request to a Sensor member of that Batch would be ignored. A batch requires the use of SenML Media types in order to support multiple sub-resources.</p>
-<p id="rfc.section.4.2.p.2">In addition, The Batch interface is an extension of the Link List interface and in consequence MUST support the same methods.</p>
-<p>
-  <em>Editor&#8217;s note: hould probably explain that this means doing a GET with an Accept:application/link-format will return the sub-resource links</em>
-</p>
-<p id="rfc.section.4.2.p.4">The following example interacts with a Batch /s/ with Sensor sub-resources /s/light, /s/temp and /s/humidity.</p>
+<p id="rfc.section.4.2.p.2">In addition, the Batch interface is an extension of the Link List interface and in consequence MUST support the same methods. For example: a GET with an Accept:application/link-format on a resource utilizing the batch interface will return the sub-resource links.</p>
+<p id="rfc.section.4.2.p.3">The following example interacts with a Batch /s/ with Sensor sub-resources /s/light, /s/temp and /s/humidity.</p>
 <pre>
 Req: GET /s/
 Res: 2.05 Content (application/senml+json)
@@ -796,34 +770,11 @@ Req: GET /a/1/led
 Res: 2.05 Content (text/plain)
 0
 </pre>
-<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#function-set" id="function-set">Function Sets and Profiles</a></h1>
-<p id="rfc.section.5.p.1">This section defines how a set of REST resources can be created called a function set. A Function Set is similar to a function block in the sense that it consists of input, output and parameter resources and contains internal logic. A Function Set can have a subset of mandatory inputs, outputs and parameters to provide minimum interoperability. It can also be extended with manufacturer/user-specific resources. A device is composed of one or more Function Set instances.</p>
-<p id="rfc.section.5.p.2">An example of function sets can be found from the CoRE Resource Directory specification that defines REST interfaces for registration, group and lookup <a href="#I-D.ietf-core-resource-directory">[I-D.ietf-core-resource-directory]</a>.</p>
-<p id="rfc.section.5.p.3">The OMA Lightweight M2M standard <a href="#OMA-TS-LWM2M">[OMA-TS-LWM2M]</a> also defines a function set structure called an Objects that use integer path, instance and resource URI segments. OMA Objects can be defined and then registered with an OMA maintained registry <a href="#OMA-TS-LWM2M">[OMA-TS-LWM2M]</a>. This section is simply meant as a guideline for the definition of other such REST interfaces, either custom or part of other specifications.</p>
-<h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> <a href="#definition" id="definition">Defining a Function Set</a></h1>
-<p id="rfc.section.5.1.p.1">In a Function Set, types of resources are defined. Each type includes a human readable name, a path template, a Resource Type for discovery, the Interface Definition and the data type and allowed values. A Function Set definition may also include a field indicating if a sub-resource is mandatory or optional.</p>
-<h1 id="rfc.section.5.1.1"><a href="#rfc.section.5.1.1">5.1.1.</a> <a href="#path-template" id="path-template">Path template</a></h1>
-<p id="rfc.section.5.1.1.p.1">A Function Set is a container resource under which its sub-resources are organized. The profile defines the path to each resource of a Function Set in a path template. The template can contain either relative paths or absolute paths depending on the profile needs. An absolute Function Set should be located at its recommended root path on a web server, however it can be located under an alternative path if necessary (for example multi-purpose devices, gateways etc.). A relative Function Set can be instantiated as many times as needed on a web server with an arbitrary root path. However some Function Sets (e.g. device description) only make sense as singletons.</p>
-<p id="rfc.section.5.1.1.p.2">The path template includes a possible index {#} parameter, and possible fixed path segments.  The index {#} allows for multiple instances of this type of resource, and can be any string. The root path and the indexes are the only variable elements in a path template. All other path segments should be fixed.</p>
-<h1 id="rfc.section.5.1.2"><a href="#rfc.section.5.1.2">5.1.2.</a> <a href="#resource-type" id="resource-type">Resource Type</a></h1>
-<p id="rfc.section.5.1.2.p.1">Each root resource of a Function Set is assigned a Resource Type parameter, therefore making it possible to discover it. Each sub-resource of a Function Set is also assigned a Resource Type parameter. This Resource Type is used for resource discovery and is usually necessary to discover optional resources supported on a specific device. The Resource Type of a Function Set may also be used for service discovery and can be exported to DNS-SD <a href="#RFC6763">[RFC6763]</a> for example.</p>
-<p id="rfc.section.5.1.2.p.2">The Resource Type parameter defines the value that should be included in the rt= field of the CoRE Link Format when describing a link to this resource. The value SHOULD be in the form "namespace.type" for root resources and "namespace.type.subtype" for sub-resources. This naming convention facilitates resource type filtering with the /.well-known/core resource. However a profile could allow mixing in foreign namespace references within a Function Set to import external references from other object models (e.g. SenML and UCUM).</p>
-<h1 id="rfc.section.5.1.3"><a href="#rfc.section.5.1.3">5.1.3.</a> <a href="#interface-description" id="interface-description">Interface Description</a></h1>
-<p id="rfc.section.5.1.3.p.1">The Interface Description parameter defines the REST interface for that type of resource. Several base interfaces are defined in <a href="#interfaces">Section 4</a> of this document. For a given profile, the Interface Description may be inferred from the Resource Type. In that case the Interface Description MAY be elided from link descriptions of resource types defined in the profile, but should be included for custom extensions to the profile.</p>
-<p id="rfc.section.5.1.3.p.2">The root resource of a Function Set should provide a list of links to its sub-resources in order to offer gradual reveal of resources. The CoRE Link List interface defined in <a href="#link-list">Section 7.1</a> offers this functionality so a root resource should support this interface or a derived interface like CoRE Batch (See <a href="#batch">Section 7.2</a>).</p>
-<h1 id="rfc.section.5.1.4"><a href="#rfc.section.5.1.4">5.1.4.</a> <a href="#data-type" id="data-type">Data type</a></h1>
-<p id="rfc.section.5.1.4.p.1">The Data Type field defines the type of value (and possible range) that is returned in response to a GET for that resource or accepted with a PUT. The interfaces defined in <a href="#interfaces">Section 4</a> make use of plain text and SenML Media types for the actual format of this data. A profile may restrict the list of supported content formats for the CoRE interfaces or define new interfaces with new content types.</p>
-<h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> <a href="#discovery" id="discovery">Discovery</a></h1>
-<p id="rfc.section.5.2.p.1">A device conforming to a profile SHOULD make its resources discoverable by providing links to the resources on the path /.well-known/core as defined in <a href="#RFC6690">[RFC6690]</a>. All resources hosted on a device SHOULD be discoverable either with a direct link in /.well-known/core or by following successive links starting from /.well-known/core.</p>
-<p id="rfc.section.5.2.p.2">The root path of a Function Set instance SHOULD be directly referenced in /.well-known/core in order to offer discovery at the first discovery stage. A device with more than 10 individual resources SHOULD only expose Function Set instances in /.well-known/core to limit the size of this resource.</p>
-<p id="rfc.section.5.2.p.3">In addition, a device MAY register its resources to a Resource Directory using the registration interface defined in <a href="#I-D.ietf-core-resource-directory">[I-D.ietf-core-resource-directory]</a> if such a directory is available.</p>
-<h1 id="rfc.section.5.3"><a href="#rfc.section.5.3">5.3.</a> <a href="#versioning" id="versioning">Versioning</a></h1>
-<p id="rfc.section.5.3.p.1">A profile should track Function Set changes to avoid incompatibility issues. Evolutions in a Function Set SHOULD be backward compatible.</p>
-<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#Security" id="Security">Security Considerations</a></h1>
-<p id="rfc.section.6.p.1">An implementation of a client needs to be prepared to deal with responses to a request that differ from what is specified in this document. A server implementing what the client thinks is a resource with one of these interface descriptions could return malformed representations and response codes either by accident or maliciously. A server sending maliciously malformed responses could attempt to take advantage of a poorly implemented client for example to crash the node or perform denial of service.</p>
-<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a></h1>
-<p id="rfc.section.7.p.1">This document registers the following CoRE Interface Description (if=) Link Target Attribute Values.</p>
-<h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> <a href="#link-list" id="link-list">Link List</a></h1>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#Security" id="Security">Security Considerations</a></h1>
+<p id="rfc.section.5.p.1">An implementation of a client needs to be prepared to deal with responses to a request that differ from what is specified in this document. A server implementing what the client thinks is a resource with one of these interface descriptions could return malformed representations and response codes either by accident or maliciously. A server sending maliciously malformed responses could attempt to take advantage of a poorly implemented client for example to crash the node or perform denial of service.</p>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a></h1>
+<p id="rfc.section.6.p.1">This document registers the following CoRE Interface Description (if=) Link Target Attribute Values.</p>
+<h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> <a href="#link-list" id="link-list">Link List</a></h1>
 <p/>
 
 <dl>
@@ -836,14 +787,14 @@ Res: 2.05 Content (text/plain)
   <dt>Notes:</dt>
   <dd style="margin-left: 8">None</dd>
 </dl>
-<h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> <a href="#batch" id="batch">Batch</a></h1>
+<h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> <a href="#batch" id="batch">Batch</a></h1>
 <p/>
 
 <dl>
   <dt>Attribute Value:</dt>
   <dd style="margin-left: 8">core.b</dd>
 </dl>
-<p id="rfc.section.7.2.p.2">Description: The Batch interface is used to manipulate a collection of sub-resources at the same time.</p>
+<p id="rfc.section.6.2.p.2">Description: The Batch interface is used to manipulate a collection of sub-resources at the same time.</p>
 <p/>
 
 <dl>
@@ -852,7 +803,7 @@ Res: 2.05 Content (text/plain)
   <dt>Notes:</dt>
   <dd style="margin-left: 8">None</dd>
 </dl>
-<h1 id="rfc.section.7.3"><a href="#rfc.section.7.3">7.3.</a> <a href="#linked-batch" id="linked-batch">Linked Batch</a></h1>
+<h1 id="rfc.section.6.3"><a href="#rfc.section.6.3">6.3.</a> <a href="#linked-batch" id="linked-batch">Linked Batch</a></h1>
 <p/>
 
 <dl>
@@ -865,7 +816,7 @@ Res: 2.05 Content (text/plain)
   <dt>Notes:</dt>
   <dd style="margin-left: 8">None</dd>
 </dl>
-<h1 id="rfc.section.7.4"><a href="#rfc.section.7.4">7.4.</a> <a href="#sensor" id="sensor">Sensor</a></h1>
+<h1 id="rfc.section.6.4"><a href="#rfc.section.6.4">6.4.</a> <a href="#sensor" id="sensor">Sensor</a></h1>
 <p/>
 
 <dl>
@@ -878,8 +829,8 @@ Res: 2.05 Content (text/plain)
   <dt>Notes:</dt>
   <dd style="margin-left: 8">None</dd>
 </dl>
-<h1 id="rfc.section.7.5"><a href="#rfc.section.7.5">7.5.</a> <a href="#parameter" id="parameter">Parameter</a></h1>
-<p id="rfc.section.7.5.p.1">Attribute Value: core.p</p>
+<h1 id="rfc.section.6.5"><a href="#rfc.section.6.5">6.5.</a> <a href="#parameter" id="parameter">Parameter</a></h1>
+<p id="rfc.section.6.5.p.1">Attribute Value: core.p</p>
 <p/>
 
 <dl>
@@ -890,7 +841,7 @@ Res: 2.05 Content (text/plain)
   <dt>Notes:</dt>
   <dd style="margin-left: 8">None</dd>
 </dl>
-<h1 id="rfc.section.7.6"><a href="#rfc.section.7.6">7.6.</a> <a href="#read-only-parameter" id="read-only-parameter">Read-only parameter</a></h1>
+<h1 id="rfc.section.6.6"><a href="#rfc.section.6.6">6.6.</a> <a href="#read-only-parameter" id="read-only-parameter">Read-only parameter</a></h1>
 <p/>
 
 <dl>
@@ -903,7 +854,7 @@ Res: 2.05 Content (text/plain)
   <dt>Notes:</dt>
   <dd style="margin-left: 8">None</dd>
 </dl>
-<h1 id="rfc.section.7.7"><a href="#rfc.section.7.7">7.7.</a> <a href="#actuator" id="actuator">Actuator</a></h1>
+<h1 id="rfc.section.6.7"><a href="#rfc.section.6.7">6.7.</a> <a href="#actuator" id="actuator">Actuator</a></h1>
 <p/>
 
 <dl>
@@ -916,10 +867,18 @@ Res: 2.05 Content (text/plain)
   <dt>Notes:</dt>
   <dd style="margin-left: 8">None</dd>
 </dl>
-<h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a></h1>
-<p id="rfc.section.8.p.1">Acknowledgement is given to colleagues from the SENSEI project who were critical in the initial development of the well-known REST interface concept, to members of the IPSO Alliance where further requirements for interface descriptions have been discussed, and to Szymon Sasin, Cedric Chauvenet, Daniel Gavelle and Carsten Bormann who have provided useful discussion and input to the concepts in this document.</p>
-<h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#changelog" id="changelog">Changelog</a></h1>
-<p id="rfc.section.9.p.1">Changes from -05 to -06:</p>
+<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a></h1>
+<p id="rfc.section.7.p.1">Acknowledgement is given to colleagues from the SENSEI project who were critical in the initial development of the well-known REST interface concept, to members of the IPSO Alliance where further requirements for interface descriptions have been discussed, and to Szymon Sasin, Cedric Chauvenet, Daniel Gavelle and Carsten Bormann who have provided useful discussion and input to the concepts in this document.</p>
+<h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#changelog" id="changelog">Changelog</a></h1>
+<p id="rfc.section.8.p.1">Changes from -06 to 07:</p>
+<p/>
+
+<ul>
+  <li>Corrected <a href="#figbindexp">Figure 1</a> sub-resource names e.g. tmp to temp and hum to humidity.</li>
+  <li>Addressed the editor&#8217;s note in <a href="#hbatch">Section 4.2</a>.</li>
+  <li>Removed section on function sets and profiles as agreed to at the IETF#97.</li>
+</ul>
+<p id="rfc.section.8.p.3">Changes from -05 to -06:</p>
 <p/>
 
 <ul>
@@ -933,7 +892,7 @@ Res: 2.05 Content (text/plain)
   <li>Section 8: Updated IANA considerations.</li>
   <li>Added Appendix A to discuss current state of the art wrt to collections, function sets etc.</li>
 </ul>
-<p id="rfc.section.9.p.3">Changes from -04 to -05:</p>
+<p id="rfc.section.8.p.5">Changes from -04 to -05:</p>
 <p/>
 
 <ul>
@@ -943,7 +902,7 @@ Res: 2.05 Content (text/plain)
   <li>Fixed minor typos.</li>
   <li>Updated references.</li>
 </ul>
-<p id="rfc.section.9.p.5">Changes from -03 to -04:</p>
+<p id="rfc.section.8.p.7">Changes from -03 to -04:</p>
 <p/>
 
 <ul>
@@ -956,7 +915,7 @@ Res: 2.05 Content (text/plain)
   <li>Add a Collection section to describe the collection types.</li>
   <li>Add the Hypermedia Collection Interface Description.</li>
 </ul>
-<p id="rfc.section.9.p.7">Changes from -02 to -03:</p>
+<p id="rfc.section.8.p.9">Changes from -02 to -03:</p>
 <p/>
 
 <ul>
@@ -968,45 +927,45 @@ Res: 2.05 Content (text/plain)
   <li>Removed query parameters from Observe definition.</li>
   <li>Added observe-cancel definition to WADL and to observable interfaces.</li>
 </ul>
-<p id="rfc.section.9.p.9">Changes from -01 to -02:</p>
+<p id="rfc.section.8.p.11">Changes from -01 to -02:</p>
 <p/>
 
 <ul>
   <li>Updated the date and version, fixed references.</li>
   <li>&#8220;Removed pmin and pmax observe parameters <samp>[Ticket #336]</samp>.&#8221;</li>
 </ul>
-<p id="rfc.section.9.p.11">Changes from -00 to WG Document -01</p>
+<p id="rfc.section.8.p.13">Changes from -00 to WG Document -01</p>
 <p/>
 
 <ul>
   <li>Improvements to the Function Set section.</li>
 </ul>
-<p id="rfc.section.9.p.13">Changes from -05 to WG Document -00</p>
+<p id="rfc.section.8.p.15">Changes from -05 to WG Document -00</p>
 <p/>
 
 <ul>
   <li>Updated the date and version.</li>
 </ul>
-<p id="rfc.section.9.p.15">Changes from -04 to -05</p>
+<p id="rfc.section.8.p.17">Changes from -04 to -05</p>
 <p/>
 
 <ul>
   <li>Made the Observation control parameters to be treated as resources rather than Observe query parameters. Added Less Than and Greater Than parameters.</li>
 </ul>
-<p id="rfc.section.9.p.17">Changes from -03 to -04</p>
+<p id="rfc.section.8.p.19">Changes from -03 to -04</p>
 <p/>
 
 <ul>
   <li>Draft refresh</li>
 </ul>
-<p id="rfc.section.9.p.19">Changes from -02 to -03</p>
+<p id="rfc.section.8.p.21">Changes from -02 to -03</p>
 <p/>
 
 <ul>
   <li>Added Bindings</li>
   <li>Updated all rt= and if= for the new Link Format IANA rules</li>
 </ul>
-<p id="rfc.section.9.p.21">Changes from -01 to -02</p>
+<p id="rfc.section.8.p.23">Changes from -01 to -02</p>
 <p/>
 
 <ul>
@@ -1016,8 +975,8 @@ Res: 2.05 Content (text/plain)
   <li>Improved the WADL interface definition.</li>
   <li>Added a simple profile example.</li>
 </ul>
-<h1 id="rfc.references"><a href="#rfc.references">10.</a> References</h1>
-<h1 id="rfc.references.1"><a href="#rfc.references.1">10.1.</a> Normative References</h1>
+<h1 id="rfc.references"><a href="#rfc.references">9.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">9.1.</a> Normative References</h1>
 <table>
   <tbody>
     <tr>
@@ -1040,26 +999,26 @@ Res: 2.05 Content (text/plain)
     </tr>
   </tbody>
 </table>
-<h1 id="rfc.references.2"><a href="#rfc.references.2">10.2.</a> Informative References</h1>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">9.2.</a> Informative References</h1>
 <table>
   <tbody>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-core-dynlink">[I-D.ietf-core-dynlink]</b>
       </td>
-      <td class="top"><a>Shelby, Z.</a>, <a>Vial, M.</a>, <a>Koster, M.</a> and <a>C. Groves</a>, "<a href="http://tools.ietf.org/html/draft-ietf-core-dynlink-00">Dynamic Resource Linking for Constrained RESTful Environments</a>", Internet-Draft draft-ietf-core-dynlink-00, October 2016.</td>
+      <td class="top"><a>Shelby, Z.</a>, <a>Vial, M.</a>, <a>Koster, M.</a> and <a>C. Groves</a>, "<a href="http://tools.ietf.org/html/draft-ietf-core-dynlink-01">Dynamic Resource Linking for Constrained RESTful Environments</a>", Internet-Draft draft-ietf-core-dynlink-01, October 2016.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-core-resource-directory">[I-D.ietf-core-resource-directory]</b>
       </td>
-      <td class="top"><a>Shelby, Z.</a>, <a>Koster, M.</a>, <a>Bormann, C.</a> and <a>P. Stok</a>, "<a href="http://tools.ietf.org/html/draft-ietf-core-resource-directory-08">CoRE Resource Directory</a>", Internet-Draft draft-ietf-core-resource-directory-08, July 2016.</td>
+      <td class="top"><a>Shelby, Z.</a>, <a>Koster, M.</a>, <a>Bormann, C.</a> and <a>P. Stok</a>, "<a href="http://tools.ietf.org/html/draft-ietf-core-resource-directory-09">CoRE Resource Directory</a>", Internet-Draft draft-ietf-core-resource-directory-09, October 2016.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-core-senml">[I-D.ietf-core-senml]</b>
       </td>
-      <td class="top"><a>Jennings, C.</a>, <a>Shelby, Z.</a>, <a>Arkko, J.</a>, <a>Keranen, A.</a> and <a>C. Bormann</a>, <a href="http://tools.ietf.org/html/draft-ietf-core-senml-03">Media Types for Sensor Markup Language (SenML)</a>", Internet-Draft draft-ietf-core-senml-03, October 2016.</td>
+      <td class="top"><a>Jennings, C.</a>, <a>Shelby, Z.</a>, <a>Arkko, J.</a>, <a>Keranen, A.</a> and <a>C. Bormann</a>, <a href="http://tools.ietf.org/html/draft-ietf-core-senml-04">Media Types for Sensor Measurement Lists (SenML)</a>", Internet-Draft draft-ietf-core-senml-04, October 2016.</td>
     </tr>
     <tr><td class="reference"><b id="OIC-Core">[OIC-Core]</b></td><td class="top"><a href="https://openconnectivity.org/resources/specifications">OIC Resource Type Specification v1.1.0</a>", 2016.</td>, "</tr>
     <tr><td class="reference"><b id="OIC-SmartHome">[OIC-SmartHome]</b></td><td class="top"><a href="https://openconnectivity.org/resources/specifications">OIC Smart Home Device Specification v1.1.0</a>", 2016.</td>, "</tr>
@@ -1105,8 +1064,9 @@ Res: 2.05 Content (text/plain)
   </tbody>
 </table>
 <h1 id="rfc.appendix.A"><a href="#rfc.appendix.A">Appendix A.</a> <a href="#current-usage-of-interfaces-and-function-sets" id="current-usage-of-interfaces-and-function-sets">Current Usage of Interfaces and Function Sets</a></h1>
-<p id="rfc.section.A.p.1">This appendix analyses the current landscape with regards the definition and use of collections, interfaces and function sets/profiles. This should be considered when considering the scope of this document.</p>
-<p id="rfc.section.A.p.2">In summary it can be seen that there is a lack of consistancy of the definition and usage of interface description and function sets.</p>
+<p id="rfc.section.A.p.1">Editor&#8217;s note: This appendix will be removed. It is only included for information.</p>
+<p id="rfc.section.A.p.2">This appendix analyses the current landscape with regards the definition and use of collections, interfaces and function sets/profiles. This should be considered when considering the scope of this document.</p>
+<p id="rfc.section.A.p.3">In summary it can be seen that there is a lack of consistancy of the definition and usage of interface description and function sets.</p>
 <h1 id="rfc.appendix.A.1"><a href="#rfc.appendix.A.1">A.1.</a> <a href="#constrained-restful-environments-core-link-format-ietf" id="constrained-restful-environments-core-link-format-ietf">Constrained RESTful Environments (CoRE) Link Format (IETF)</a></h1>
 <p><a href="#RFC6690">[RFC6690]</a> assumes that different deployments or application domains will define the appropriate REST Interface Descriptions along with Resource Types to make discovery meaningful. It highlights that collections are often used for these interfaces.</p>
 <p id="rfc.section.A.1.p.2">Whilst 3.2/<a href="#RFC6690">[RFC6690]</a> defines a new Interface Description &#8216;if&#8217; attribute the procedures around it are about the naming of the interface not what information should be included in the documentation about the interface.</p>
@@ -1139,15 +1099,15 @@ batch:        No OCF equivalent -&gt; IETF (core.b)
 <p id="rfc.section.A.5.p.3">It does not identify the interfaces through an Interface Description (if=) attribute.</p>
 <p id="rfc.section.A.5.p.4">It does not use the term function set. Informally the specification could be considered as a function set.</p>
 <p id="rfc.section.A.5.p.5">Note: It refers to draft-ietf-core-interfaces-00. It also makes use of the binding/observation attributes from draft-ietf-dynlink-00 but does not refer to that document.</p>
-<h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> <a href="#simple-profile" id="simple-profile">Profile example</a></h1>
-<p id="rfc.section.B.p.1">The following is a short definition of simple profile. This simplistic profile is for use in the examples of this document.</p>
+<h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> <a href="#simple-profile" id="simple-profile">Resource Profile example</a></h1>
+<p id="rfc.section.B.p.1">The following is a short definition of simple device resource profile. This simplistic profile is for use in the examples of this document.</p>
 <div id="rfc.table.3"/>
 <div id="tablistfs"/>
 <table cellpadding="3" cellspacing="0" class="tt full center">
-  <caption>List of Function Sets</caption>
+  <caption>Functional list of resources</caption>
   <thead>
     <tr>
-      <th class="left">Function Set</th>
+      <th class="left">Functions</th>
       <th class="left">Root Path</th>
       <th class="left">RT</th>
       <th class="left">IF</th>
@@ -1177,7 +1137,7 @@ batch:        No OCF equivalent -&gt; IETF (core.b)
 <div id="rfc.table.4"/>
 <div id="tabddfs"/>
 <table cellpadding="3" cellspacing="0" class="tt full center">
-  <caption>Device Description Function Set</caption>
+  <caption>Device Description Resources</caption>
   <thead>
     <tr>
       <th class="left">Type</th>
@@ -1207,7 +1167,7 @@ batch:        No OCF equivalent -&gt; IETF (core.b)
 <div id="rfc.table.5"/>
 <div id="tabsfs"/>
 <table cellpadding="3" cellspacing="0" class="tt full center">
-  <caption>Sensors Function Set</caption>
+  <caption>Sensor Resources</caption>
   <thead>
     <tr>
       <th class="left">Type</th>
@@ -1265,7 +1225,7 @@ batch:        No OCF equivalent -&gt; IETF (core.b)
 <div id="rfc.table.6"/>
 <div id="tabafs"/>
 <table cellpadding="3" cellspacing="0" class="tt full center">
-  <caption>Actuators Function Set</caption>
+  <caption>Actuator Resources</caption>
   <thead>
     <tr>
       <th class="left">Type</th>
