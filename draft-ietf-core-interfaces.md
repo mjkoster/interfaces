@@ -2,7 +2,7 @@
 title: "Reusable Interface Definitions for Constrained RESTful Environments"
 abbrev: Interface Definitions for CoRE
 docname: draft-ietf-core-interfaces-latest
-date: 2016-12-21
+date: 2017-02-24
 category: info
 
 ipr: trust200902
@@ -47,7 +47,7 @@ author:
   city: ''
   code: ''
   country: Australia
-  email: Christian.Groves@nteczone.com
+  email: cngroves.std@gmail.com
 
 normative:
   RFC2119:
@@ -57,7 +57,6 @@ normative:
 informative:
   RFC3986:
   RFC6573:
-  RFC6763:
   RFC7230:
   RFC7252:
   RFC7396:
@@ -174,7 +173,7 @@ Content-Formats for Collections     {#content-formats}
 -------------------------------
 The collection interfaces by default use CoRE Link-Format for the link representations and SenML or text/plain for representations of items. The examples given are for collections that expose resources and links in these formats. In addition, a new "collection" Content-Format is defined based on the SenML framework which represents both links and items in the collection.
 
-The choice of whether to return a representation of the links or of the items or of the collection format is determined by the accepts header option in the request. Likewise, the choice of updating link metadata or item data or the collection resource itself is determined by the Content-Format option in the header of the update request operation.
+The choice of whether to return a representation of the links or of the items or of the collection format is determined by the Accept header option in the request. Likewise, the choice of updating link metadata or item data or the collection resource itself is determined by the Content-Format option in the header of the update request operation.
 
 The default Content-Formats for collection types described in this document are:
 
@@ -272,9 +271,9 @@ Res: 2.05 Content (application/link-format)
 
 Link List           {#hlink-list}
 ---------
-The Link List interface is used to retrieve (GET) a list of resources on a web server. The GET request SHOULD contain an Accept option with the application/link-format content format; however if the resource does not support any other form of GET methods the Accept option MAY be elided. The Accept option SHOULD only include the application/link-format content format.
+The Link List interface is used to retrieve (GET) a list of resources on a web server. The GET request SHOULD contain an Accept option with the application/link-format content format. However if the resource does not support any other form of content-format the Accept option MAY be elided. 
 
-*Editor's note: This use of Accept is not very clear, should probably explain this is due to this interface description being extended by Batch and Linked Batch later.*
+Note: The use of an Accept option with application/link-format is recommended even though it is not strictly needed for the link list interface because this interface is extended by the batch and linked batch interfaces where different content-formats are possible.
 
 The request returns a list of URI references with absolute paths to the resources as defined in CoRE Link Format. This interface is typically used with a parent resource to enumerate sub-resources but may be used to reference any resource on a web server.
 
@@ -533,6 +532,12 @@ Acknowledgement is given to colleagues from the SENSEI project who were critical
 
 Changelog
 =========
+Changes from -07 to 08:
+
+* Section 3.3: Modified Accepts to Accept header option.
+
+* Addressed the editor's note in {{hlink-list}} to clarify the use of the Accept option.
+
 Changes from -06 to 07:
 
 * Corrected {{figbindexp}} sub-resource names e.g. tmp to temp and hum to humidity.
