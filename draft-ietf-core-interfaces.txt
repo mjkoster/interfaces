@@ -5,12 +5,12 @@
 CoRE Working Group                                             Z. Shelby
 Internet-Draft                                                       ARM
 Intended status: Informational                                   Z. Vial
-Expires: June 24, 2017                                Schneider-Electric
+Expires: August 28, 2017                              Schneider-Electric
                                                                M. Koster
                                                              SmartThings
                                                                C. Groves
                                                                   Huawei
-                                                       December 21, 2016
+                                                       February 24, 2017
 
 
   Reusable Interface Definitions for Constrained RESTful Environments
@@ -53,16 +53,16 @@ Status of This Memo
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 1]
+Shelby, et al.           Expires August 28, 2017                [Page 1]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
-   This Internet-Draft will expire on June 24, 2017.
+   This Internet-Draft will expire on August 28, 2017.
 
 Copyright Notice
 
-   Copyright (c) 2016 IETF Trust and the persons identified as the
+   Copyright (c) 2017 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 2]
+Shelby, et al.           Expires August 28, 2017                [Page 2]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  20
@@ -165,9 +165,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 3]
+Shelby, et al.           Expires August 28, 2017                [Page 3]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    parameters, and responses.  Basic interface descriptions are defined
@@ -221,9 +221,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 4]
+Shelby, et al.           Expires August 28, 2017                [Page 4]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
 3.  Collections
@@ -277,9 +277,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 5]
+Shelby, et al.           Expires August 28, 2017                [Page 5]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
 3.2.  Use Cases for Collections
@@ -319,7 +319,7 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
    links and items in the collection.
 
    The choice of whether to return a representation of the links or of
-   the items or of the collection format is determined by the accepts
+   the items or of the collection format is determined by the Accept
    header option in the request.  Likewise, the choice of updating link
    metadata or item data or the collection resource itself is determined
    by the Content-Format option in the header of the update request
@@ -333,9 +333,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 6]
+Shelby, et al.           Expires August 28, 2017                [Page 6]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    Items:  application/senml+json, text/plain
@@ -389,9 +389,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 7]
+Shelby, et al.           Expires August 28, 2017                [Page 7]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    Link Embedding enables the bulk processing of items in the collection
@@ -445,9 +445,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 8]
+Shelby, et al.           Expires August 28, 2017                [Page 8]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
             +-----------------+---------+--------------------+
@@ -501,9 +501,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                 [Page 9]
+Shelby, et al.           Expires August 28, 2017                [Page 9]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
      +--------------+---------+-----------------+--------------------+
@@ -557,23 +557,23 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 10]
+Shelby, et al.           Expires August 28, 2017               [Page 10]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
 4.1.  Link List
 
    The Link List interface is used to retrieve (GET) a list of resources
    on a web server.  The GET request SHOULD contain an Accept option
-   with the application/link-format content format; however if the
-   resource does not support any other form of GET methods the Accept
-   option MAY be elided.  The Accept option SHOULD only include the
-   application/link-format content format.
+   with the application/link-format content format.  However if the
+   resource does not support any other form of content-format the Accept
+   option MAY be elided.
 
-   _Editor's note: This use of Accept is not very clear, should probably
-   explain this is due to this interface description being extended by
-   Batch and Linked Batch later._
+   Note: The use of an Accept option with application/link-format is
+   recommended even though it is not strictly needed for the link list
+   interface because this interface is extended by the batch and linked
+   batch interfaces where different content-formats are possible.
 
    The request returns a list of URI references with absolute paths to
    the resources as defined in CoRE Link Format.  This interface is
@@ -613,9 +613,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 11]
+Shelby, et al.           Expires August 28, 2017               [Page 11]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    The following example interacts with a Batch /s/ with Sensor sub-
@@ -669,9 +669,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 12]
+Shelby, et al.           Expires August 28, 2017               [Page 12]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    Req: POST /l/ (Content-Format: application/link-format)
@@ -725,9 +725,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 13]
+Shelby, et al.           Expires August 28, 2017               [Page 13]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    Req: GET /s/humidity (Accept: text/plain)
@@ -781,9 +781,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 14]
+Shelby, et al.           Expires August 28, 2017               [Page 14]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    the state of an actuator, for example to toggle between its possible
@@ -837,9 +837,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 15]
+Shelby, et al.           Expires August 28, 2017               [Page 15]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    Reference:  This document.  Note to RFC Editor - please insert the
@@ -893,9 +893,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 16]
+Shelby, et al.           Expires August 28, 2017               [Page 16]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
    Description:  The Parameter interface allows configurable parameters
@@ -949,12 +949,19 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 17]
+Shelby, et al.           Expires August 28, 2017               [Page 17]
 
-Internet-Draft       Interface Definitions for CoRE        December 2016
+Internet-Draft       Interface Definitions for CoRE        February 2017
 
 
 8.  Changelog
+
+   Changes from -07 to 08:
+
+   o  Section 3.3: Modified Accepts to Accept header option.
+
+   o  Addressed the editor's note in Section 4.1 to clarify the use of
+      the Accept option.
 
    Changes from -06 to 07:
 
@@ -995,20 +1002,20 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
    o  Removed Link Bindings and Observe attributes.  This functionality
       is now contained in I-D.ietf-core-dynlink.
 
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 18]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    o  Hypermedia collections have been removed.  This is covered in a
       new T2TRG draft.
 
    o  The WADL description has been removed.
 
    o  Fixed minor typos.
-
-
-
-
-Shelby, et al.            Expires June 24, 2017                [Page 18]
-
-Internet-Draft       Interface Definitions for CoRE        December 2016
-
 
    o  Updated references.
 
@@ -1051,6 +1058,14 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
 
    o  Updated the date and version, fixed references.
 
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 19]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    o  "Removed pmin and pmax observe parameters "[Ticket #336]"."
 
    Changes from -00 to WG Document -01
@@ -1058,13 +1073,6 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
    o  Improvements to the Function Set section.
 
    Changes from -05 to WG Document -00
-
-
-
-Shelby, et al.            Expires June 24, 2017                [Page 19]
-
-Internet-Draft       Interface Definitions for CoRE        December 2016
-
 
    o  Updated the date and version.
 
@@ -1105,6 +1113,15 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
               DOI 10.17487/RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 20]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    [RFC5988]  Nottingham, M., "Web Linking", RFC 5988,
               DOI 10.17487/RFC5988, October 2010,
               <http://www.rfc-editor.org/info/rfc5988>.
@@ -1113,22 +1130,13 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
               Format", RFC 6690, DOI 10.17487/RFC6690, August 2012,
               <http://www.rfc-editor.org/info/rfc6690>.
 
-
-
-
-
-Shelby, et al.            Expires June 24, 2017                [Page 20]
-
-Internet-Draft       Interface Definitions for CoRE        December 2016
-
-
 9.2.  Informative References
 
    [I-D.ietf-core-dynlink]
               Shelby, Z., Vial, M., Koster, M., and C. Groves, "Dynamic
               Resource Linking for Constrained RESTful Environments",
-              draft-ietf-core-dynlink-01 (work in progress), October
-              2016.
+              draft-ietf-core-dynlink-02 (work in progress), February
+              2017.
 
    [I-D.ietf-core-resource-directory]
               Shelby, Z., Koster, M., Bormann, C., and P. Stok, "CoRE
@@ -1159,6 +1167,17 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
               "TS 0008 v1.3.2 CoAP Protocol Binding", 2016,
               <http://www.onem2m.org/technical/published-documents>.
 
+
+
+
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 21]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    [oneM2MTS0023]
               "TS 0023 v2.0.0 Home Appliances Information Model and
               Mapping", 2016,
@@ -1169,22 +1188,9 @@ Internet-Draft       Interface Definitions for CoRE        December 2016
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
               <http://www.rfc-editor.org/info/rfc3986>.
 
-
-
-
-
-Shelby, et al.            Expires June 24, 2017                [Page 21]
-
-Internet-Draft       Interface Definitions for CoRE        December 2016
-
-
    [RFC6573]  Amundsen, M., "The Item and Collection Link Relations",
               RFC 6573, DOI 10.17487/RFC6573, April 2012,
               <http://www.rfc-editor.org/info/rfc6573>.
-
-   [RFC6763]  Cheshire, S. and M. Krochmal, "DNS-Based Service
-              Discovery", RFC 6763, DOI 10.17487/RFC6763, February 2013,
-              <http://www.rfc-editor.org/info/rfc6763>.
 
    [RFC7230]  Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Message Syntax and Routing",
@@ -1220,19 +1226,20 @@ A.1.  Constrained RESTful Environments (CoRE) Link Format (IETF)
    Resource Types to make discovery meaningful.  It highlights that
    collections are often used for these interfaces.
 
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 22]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    Whilst 3.2/[RFC6690] defines a new Interface Description 'if'
    attribute the procedures around it are about the naming of the
    interface not what information should be included in the
    documentation about the interface.
 
    Function sets are not discussed.
-
-
-
-Shelby, et al.            Expires June 24, 2017                [Page 22]
-
-Internet-Draft       Interface Definitions for CoRE        December 2016
-
 
 A.2.  CoRE Resource Directory (IETF)
 
@@ -1275,20 +1282,17 @@ A.3.  Open Connectivity Foundation (OCF)
    It does however discuss the concept of profiles.  The OCF defines two
    sets of documents.  The core specification documents such as
    [OIC-Core] and vertical profile specification documents which provide
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 23]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    specific information for specific applications.  The OIC Smart Home
    Device Specification [OIC-SmartHome] is one such specification.  It
    provides information on the resource model, discovery and data types.
-
-
-
-
-
-
-
-Shelby, et al.            Expires June 24, 2017                [Page 23]
-
-Internet-Draft       Interface Definitions for CoRE        December 2016
-
 
 A.4.  oneM2M
 
@@ -1333,18 +1337,18 @@ A.5.  OMA LWM2M
    It does not use the term function set.  Informally the specification
    could be considered as a function set.
 
+
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 24]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    Note: It refers to draft-ietf-core-interfaces-00.  It also makes use
    of the binding/observation attributes from draft-ietf-dynlink-00 but
    does not refer to that document.
-
-
-
-
-
-Shelby, et al.            Expires June 24, 2017                [Page 24]
-
-Internet-Draft       Interface Definitions for CoRE        December 2016
-
 
 Appendix B.  Resource Profile example
 
@@ -1374,6 +1378,30 @@ Appendix B.  Resource Profile example
 
                    Table 4: Device Description Resources
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 25]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    +-------------+-------------+----------------+--------+-------------+
    | Type        | Path        | RT             | IF     | Data Type   |
    +-------------+-------------+----------------+--------+-------------+
@@ -1391,16 +1419,6 @@ Appendix B.  Resource Profile example
    +-------------+-------------+----------------+--------+-------------+
 
                          Table 5: Sensor Resources
-
-
-
-
-
-
-Shelby, et al.            Expires June 24, 2017                [Page 25]
-
-Internet-Draft       Interface Definitions for CoRE        December 2016
-
 
        +------+------------+----------------+--------+-------------+
        | Type | Path       | RT             | IF     | Data Type   |
@@ -1431,6 +1449,15 @@ Authors' Addresses
    Email: matthieu.vial@schneider-electric.com
 
 
+
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 26]
+
+Internet-Draft       Interface Definitions for CoRE        February 2017
+
+
    Michael Koster
    SmartThings
    665 Clyde Avenue
@@ -1444,7 +1471,7 @@ Authors' Addresses
    Huawei
    Australia
 
-   Email: Christian.Groves@nteczone.com
+   Email: cngroves.std@gmail.com
 
 
 
@@ -1453,4 +1480,33 @@ Authors' Addresses
 
 
 
-Shelby, et al.            Expires June 24, 2017                [Page 26]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Shelby, et al.           Expires August 28, 2017               [Page 27]
