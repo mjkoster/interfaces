@@ -2,7 +2,7 @@
 title: "Reusable Interface Definitions for Constrained RESTful Environments"
 abbrev: Interface Definitions for CoRE
 docname: draft-ietf-core-interfaces-latest
-date: 2017-02-24
+date: 2017-03-13
 category: info
 
 ipr: trust200902
@@ -42,7 +42,7 @@ author:
   email: michael.koster@smartthings.com
 - ins: C. Groves
   name: Christian Groves
-  organization: Huawei
+  organization: 
   street: '' 
   city: ''
   code: ''
@@ -99,6 +99,8 @@ The Batch, Linked Batch and Link List interfaces make use of resource collection
 Many applications require a set of interface descriptions in order provide the required functionality. This document defines the concept of function sets to specify this set of interfaces and resources.
 
 *Editor's note: The git repository for the draft is found at https://github.com/core-wg/interfaces*
+
+*Editor's note: Two open issues are proposals for: Removing the binding interface in favour of the link list interface. Changing "rel" type from one attribute to two to indicate src and destination.*
 
 --- middle
 
@@ -215,7 +217,7 @@ Collections MAY support query filtering as defined in CoRE Link-Format {{RFC6690
 
 Observing Collections         {#observing}
 ---------------------
-Resource Observation via {{I-D.ietf-core-dynlink}} using CoAP {{RFC7252}} MAY be supported on items in a collection. A subset of the conditional observe parameters MAY be specified to apply. In most cases pmin and pmax are useful. Resource observation on a collection's items resource MAY report any changes of resource state in any item in the collection. Observation Responses, or notifications, SHOULD provide representations of the resources that have changed in SenML Content-Format. Notifications MAY include multiple observations of a particular resource, with SenML time stamps indicating the observation times.
+Resource Observation via {{I-D.ietf-core-dynlink}} using CoAP {{RFC7252}} MAY be supported on items in a collection. A subset of the conditional observe parameters MAY be specified to apply. In most cases pmin and pmax are useful. Resource observation on a collection's items resource returns the collection representation. Observation Responses, or notifications, SHOULD provide the collection representations in SenML Content-Format. Notifications MAY include multiple observations of the colection resource, with SenML time stamps indicating the observation times.
 
 Collection Types            {#collection-types}
 ----------------
@@ -532,6 +534,13 @@ Acknowledgement is given to colleagues from the SENSEI project who were critical
 
 Changelog
 =========
+
+Changes from -08 to 09:
+
+* Section 3.6: Modified to indicate that the entire collection resource is returned.
+
+* General: Added editor's note with open issues.
+
 Changes from -07 to 08:
 
 * Section 3.3: Modified Accepts to Accept header option.
