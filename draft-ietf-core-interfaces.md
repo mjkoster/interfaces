@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Reusable Interface Definitions for Constrained RESTful Environments"
 abbrev: Interface Definitions for CoRE
 docname: draft-ietf-core-interfaces-latest
@@ -14,6 +14,15 @@ stand_alone: yes
 pi: [toc, sortrefs, symrefs]
 
 author:
+- role: editor
+  ins: B. Silverajan
+  name: Bilhanan Silverajan
+  org: Tampere University of Technology
+  street: Korkeakoulunkatu 10
+  city: Tampere
+  code: 'FI-33720'
+  country: Finland
+  email: bilhanan.silverajan@tut.fi
 - ins: Z. Shelby
   name: Zach Shelby
   organization: ARM
@@ -23,7 +32,7 @@ author:
   country: FINLAND
   phone: "+1-408-203-9434"
   email: zach.shelby@arm.com
-- ins: Z.V. Vial
+- ins: M. Vial
   name: Matthieu Vial
   organization: Schneider-Electric
   street: '' 
@@ -48,6 +57,14 @@ author:
   code: ''
   country: Australia
   email: cngroves.std@gmail.com
+- ins: J. Zhu
+  name: Julian Zhu
+  org: Huawei
+  street: No.127 Jinye Road, Huawei Base, High-Tech Development District
+  city: Xi’an, Shaanxi Province
+  code: ''
+  country: China
+  email: jintao.zhu@huawei.com
 
 normative:
   RFC2119:
@@ -92,7 +109,7 @@ informative:
 
 --- abstract
 
-This document defines a set of Constrained RESTful Environments (CoRE) Link Format Interface Descriptions {{RFC6690}} applicable for use in constrained environments. These include the: Actuator, Paramter, Read-only parameter, Sensor, Batch, Linked Batch and Link List interfaces.
+This document defines a set of Constrained RESTful Environments (CoRE) Link Format Interface Descriptions {{RFC6690}} applicable for use in constrained environments. These include the: Actuator, Parameter, Read-only parameter, Sensor, Batch, Linked Batch and Link List interfaces.
 
 The Batch, Linked Batch and Link List interfaces make use of resource collections. This document further describes how collections relate to interfaces.
 
@@ -217,7 +234,7 @@ Collections MAY support query filtering as defined in CoRE Link-Format {{RFC6690
 
 Observing Collections         {#observing}
 ---------------------
-Resource Observation via {{I-D.ietf-core-dynlink}} using CoAP {{RFC7252}} MAY be supported on items in a collection. A subset of the conditional observe parameters MAY be specified to apply. In most cases pmin and pmax are useful. Resource observation on a collection's items resource returns the collection representation. Observation Responses, or notifications, SHOULD provide the collection representations in SenML Content-Format. Notifications MAY include multiple observations of the colection resource, with SenML time stamps indicating the observation times.
+Resource Observation via {{I-D.ietf-core-dynlink}} using CoAP {{RFC7252}} MAY be supported on items in a collection. A subset of the conditional observe parameters MAY be specified to apply. In most cases pmin and pmax are useful. Resource observation on a collection's items resource returns the collection representation. Observation Responses, or notifications, SHOULD provide the collection representations in SenML Content-Format. Notifications MAY include multiple observations of the collection resource, with SenML time stamps indicating the observation times.
 
 Collection Types            {#collection-types}
 ----------------
@@ -670,7 +687,7 @@ Editor's note: This appendix will be removed. It is only included for informatio
 
 This appendix analyses the current landscape with regards the definition and use of collections, interfaces and function sets/profiles. This should be considered when considering the scope of this document.
 
-In summary it can be seen that there is a lack of consistancy of the definition and usage of interface description and function sets. 
+In summary it can be seen that there is a lack of consistency of the definition and usage of interface description and function sets. 
 
 
 Constrained RESTful Environments (CoRE) Link Format (IETF)
@@ -687,7 +704,7 @@ CoRE Resource Directory  (IETF)
 
 {{I-D.ietf-core-resource-directory}} uses the concepts of collections, interfaces and function sets. 
 
-If defines a number of interfaces: discovery, registration, registration update, registration removal, read endpoint links, update endpoint links, registration request interface, removal request interface and lookup interface. However it does not assign an inteface description identifier (if=) to these interfaces.  
+If defines a number of interfaces: discovery, registration, registration update, registration removal, read endpoint links, update endpoint links, registration request interface, removal request interface and lookup interface. However it does not assign an interface description identifier (if=) to these interfaces.  
 
 It does define a resource directory function set which specifies relevant content formats and interfaces to be used between a resource directory and endpoints. However it does not follow the format proposed by this document.
 
