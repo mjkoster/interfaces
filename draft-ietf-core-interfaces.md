@@ -115,9 +115,9 @@ The Batch, Linked Batch and Link List interfaces make use of resource collection
 
 Many applications require a set of interface descriptions in order provide the required functionality. This document defines the concept of function sets to specify this set of interfaces and resources.
 
-*Editor's note: The git repository for the draft is found at https://github.com/core-wg/interfaces*
+Editor's notes: 
 
-*Editor's note: Two open issues are proposals for: Removing the binding interface in favour of the link list interface. Changing "rel" type from one attribute to two to indicate src and destination.*
+* The git repository for the draft is found at https://github.com/core-wg/interfaces
 
 --- middle
 
@@ -130,7 +130,7 @@ The discovery of resources offered by a constrained server is very important in 
 
 This document defines a set of Link Format interface descriptions for some common design patterns that enable the server side composition and organization, and client side discovery and consumption, of machine resources using Web Linking. A client discovering the “if” link attribute will be able to consume resources based on its knowledge of the expected interface types. In this sense the Interface Type acts in a similar way as a Content-Format, but as a selector for a high level functional abstraction.
 
-An interface description describes a resource in terms of it's associated content formats, data types, URI templates, REST methods, parameters, and responses. Basic interface descriptions are defined for sensors, actuators, and properties. 
+An interface description describes a resource in terms of its associated content formats, data types, URI templates, REST methods, parameters, and responses. Basic interface descriptions are defined for sensors, and actuators. 
 
 A set of collection types is defined for organizing resources for discovery, and for various forms of bulk interaction with resource sets using typed embedding links. 
 
@@ -551,6 +551,11 @@ Acknowledgement is given to colleagues from the SENSEI project who were critical
 
 Changelog
 =========
+Changes from -10 to 09:
+
+* Section 1: Amendments to remove discussing properties.
+* 
+* New author and editor added.
 
 Changes from -08 to 09:
 
