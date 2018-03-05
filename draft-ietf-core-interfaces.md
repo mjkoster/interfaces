@@ -14,6 +14,7 @@ stand_alone: yes
 pi: [toc, sortrefs, symrefs]
 
 author:
+
 - ins: Z. Shelby
   name: Zach Shelby
   organization: ARM
@@ -23,15 +24,17 @@ author:
   country: FINLAND
   phone: "+1-408-203-9434"
   email: zach.shelby@arm.com
+
 - ins: M. Vial
   name: Matthieu Vial
   organization: Schneider-Electric
-  street: '' 
+  street: ''
   city: Grenoble
   code: ''
   country: FRANCE
   phone: "+33 (0)47657 6522"
   email: matthieu.vial@schneider-electric.com
+
 - ins: M. Koster
   name: Michael Koster
   organization: SmartThings
@@ -40,14 +43,16 @@ author:
   code: 94043
   country: USA
   email: michael.koster@smartthings.com
+  
 - ins: C. Groves
   name: Christian Groves
-  organization: 
-  street: '' 
+  organization:
+  street: ''
   city: ''
   code: ''
   country: Australia
   email: cngroves.std@gmail.com
+
 - ins: J. Zhu
   name: Julian Zhu
   org: Huawei
@@ -56,6 +61,7 @@ author:
   code: ''
   country: China
   email: jintao.zhu@huawei.com
+
 - role: editor
   ins: B. Silverajan
   name: Bilhanan Silverajan
@@ -70,7 +76,7 @@ normative:
   RFC2119:
   RFC8288:
   RFC6690:
-  
+
 informative:
   RFC3986:
   RFC6573:
@@ -81,7 +87,7 @@ informative:
   I-D.ietf-core-resource-directory:
   I-D.ietf-core-senml:
 
-  
+
   OIC-Core:
    target: https://openconnectivity.org/resources/specifications
    title: OIC Resource Type Specification v1.1.0
@@ -91,21 +97,21 @@ informative:
    target: https://openconnectivity.org/resources/specifications
    title: OIC Smart Home Device Specification v1.1.0
    date: 2016
-   
+
   OMA-TS-LWM2M:
    target: http://technical.openmobilealliance.org/Technical/technical-information/release-program/current-releases/oma-lightweightm2m-v1-0
    title: Lightweight Machine to Machine Technical Specification
    date: 2016
-  
+
   oneM2MTS0008:
    target: http://www.onem2m.org/technical/published-documents
    title: TS 0008 v1.3.2 CoAP Protocol Binding
-   date: 2016 
-   
+   date: 2016
+
   oneM2MTS0023:
    target: http://www.onem2m.org/technical/published-documents
    title: TS 0023 v2.0.0 Home Appliances Information Model and Mapping
-   date: 2016 
+   date: 2016
 
 --- abstract
 
@@ -115,7 +121,7 @@ The Batch, Linked Batch and Link List interfaces make use of resource collection
 
 Many applications require a set of interface descriptions in order provide the required functionality. This document defines an Interface Description atribute value to describe resources conforming to a particular interface.
 
-Editor's notes: 
+Editor's notes:
 
 * The git repository for the draft is found at https://github.com/core-wg/interfaces
 
@@ -126,15 +132,15 @@ Introduction        {#introduction}
 
 IETF Standards for machine to machine communication in constrained environments describe a REST protocol and a set of related information standards that may be used to represent machine data and machine metadata in REST interfaces. CoRE Link-format is a standard for doing Web Linking {{RFC8288}} in constrained environments. SenML {{I-D.ietf-core-senml}} is a simple data model and representation format for composite and complex structured resources. CoRE Link-Format and SenML can be used by CoAP {{RFC7252}} or HTTP servers.
 
-The discovery of resources offered by a constrained server is very important in machine-to-machine applications where there are no humans in the loop. Machine application clients must be able to adapt to different resource organizations without advance knowledge of the specific data structures hosted by each connected thing. The use of Web Linking for the description and discovery of resources hosted by constrained origin servers is specified by CoRE Link Format {{RFC6690}}. CoRE Link Format additionally defines a link attribute for interface description ("if") that can be used to describe the REST interface of a resource, and may include a link to a description document. 
+The discovery of resources offered by a constrained server is very important in machine-to-machine applications where there are no humans in the loop. Machine application clients must be able to adapt to different resource organizations without advance knowledge of the specific data structures hosted by each connected thing. The use of Web Linking for the description and discovery of resources hosted by constrained origin servers is specified by CoRE Link Format {{RFC6690}}. CoRE Link Format additionally defines a link attribute for interface description ("if") that can be used to describe the REST interface of a resource, and may include a link to a description document.
 
 This document defines a set of Link Format interface descriptions for some common design patterns that enable the server side composition and organization, and client side discovery and consumption, of machine resources using Web Linking. A client discovering the “if” link attribute will be able to consume resources based on its knowledge of the expected interface types. In this sense the Interface Type acts in a similar way as a Content-Format, but as a selector for a high level functional abstraction.
 
-An interface description describes a resource in terms of its associated content formats, data types, URI templates, REST methods, parameters, and responses. Basic interface descriptions are defined for sensors, and actuators. 
+An interface description describes a resource in terms of its associated content formats, data types, URI templates, REST methods, parameters, and responses. Basic interface descriptions are defined for sensors, and actuators.
 
-A set of collection types is defined for organizing resources for discovery, and for various forms of bulk interaction with resource sets using typed embedding links. 
+A set of collection types is defined for organizing resources for discovery, and for various forms of bulk interaction with resource sets using typed embedding links.
 
-This document first defines the concept of collection interface descriptions. It then defines a number of generic interface descriptions that may be used in contrained environments. Several of these interface descriptions utilise collections. 
+This document first defines the concept of collection interface descriptions. It then defines a number of generic interface descriptions that may be used in contrained environments. Several of these interface descriptions utilise collections.
 
 Whilst this document assumes the use of CoAP {{RFC7252}}, the REST interfaces described can also be realized using HTTP {{RFC7230}}.
 
@@ -148,11 +154,11 @@ Gradual Reveal:
 : A REST design where resources are discovered progressively using Web Linking.
 
 Interface Description:
-: The Interface Description describes the generic REST interface to interact with a resource or a set of resources. Its use is described via the Interface Description 'if' attribute which is an opaque string used to provide a name or URI indicating a specific interface definition used to interact with the target resource.  One can think of this as describing verbs usable on a resource. 
+: The Interface Description describes the generic REST interface to interact with a resource or a set of resources. Its use is described via the Interface Description 'if' attribute which is an opaque string used to provide a name or URI indicating a specific interface definition used to interact with the target resource.  One can think of this as describing verbs usable on a resource.
 
 Resource Discovery:
 : The process allowing a client to identify resources being hosted on an origin server.
-  
+
 
 Collections      {#collections}
 ===========
@@ -175,11 +181,11 @@ Links in collections may be selected for processing by a particular request by u
 
 Use Cases for Collections     {#use-cases}
 -------------------------
-Collections may be used to provide gradual reveal of resources on an endpoint. There may be a small set of links at the .well-known/core location, which may in turn point to other collections of resources that represent device information, device configuration, device management, and various functional clusters of resources on the device. 
+Collections may be used to provide gradual reveal of resources on an endpoint. There may be a small set of links at the .well-known/core location, which may in turn point to other collections of resources that represent device information, device configuration, device management, and various functional clusters of resources on the device.
 
 A collection may be used to group a set of like resources for bulk state update or actuation. For example, the brightness control resources of a number of luminaries may be grouped by linking to them in a collection. The collection type may support receiving a single update from a client and sending that update to each resource item in the collection.
 
-Items may be sub-resources of the collection resource. This enables updates to multiple items in the collection to be processed together within the context of the collection resource. 
+Items may be sub-resources of the collection resource. This enables updates to multiple items in the collection to be processed together within the context of the collection resource.
 
 Content-Formats for Collections     {#content-formats}
 -------------------------------
@@ -189,10 +195,10 @@ The choice of whether to return a representation of the links or of the items or
 
 The default Content-Formats for collection types described in this document are:
 
-Links: 
+Links:
 : application/link-format, application/link-format+json
 
-Items: 
+Items:
 : application/senml+json, text/plain
 
 Links and Items in Collections      {#links-items}
@@ -200,19 +206,19 @@ Links and Items in Collections      {#links-items}
 Links use CoRE Link-Format representation by default and may point to any resource reachable from the context of the collection. This includes links to resources with absolute paths as well as links that point to other network locations, if the context of the collection allows. Links to sub-resources in the collection MUST have a path-element starting with the resource name, as per {{RFC3986}}. Links to resources in the global context MUST start with a root path identifier {{RFC8288}}. Links to other collections are formed per {{RFC3986}}.
 
 Examples of links:
-\</sen/\>;if="core.lb": 
+\</sen/\>;if="core.lb":
 : Link to the /sen/ collection describing it as a core.lb type collection (Linked Batch)
- 
-\</sen/\>;rel="grp": 
+
+\</sen/\>;rel="grp":
 : Link to the /sen/ collection indicating that /sen/ is a member of a group in the collection in which the link appears.
 
-\</sen/temp\>;rt="temperature": 
+\</sen/temp\>;rt="temperature":
 : A link to the temp resource with an absolute path.
 
-\<temp\>;rt="temperature": 
+\<temp\>;rt="temperature":
 : Link to the temp subresource of the collection in which this link appears.
 
-\<temp\>;anchor="/sen/": 
+\<temp\>;anchor="/sen/":
 : A link to the temp subresource of the collection /sen/ which is assumed not to be a subresource of the collection in which the link appears, but is expected to be identified in the collection by resource name.
 
 Links in the collection MAY be Read, Updated, Added, or Removed using the CoRE Link-Format or JSON Merge-Patch Content-Formats on the collection resource. Reading links uses the GET method and returns an array or list containing the link-values of all selected links. Links may be added to the collection using POST or PATCH methods. Updates to links MUST use the PATCH method and MAY use query filtering to select links for updating. The PATCH method on links MUST use the JSON Merge-Patch Content-Format (application/merge-patch+json) specified in {{RFC7396}}.
@@ -224,7 +230,7 @@ Link Embedding        {#embedding}
 
 Collections may provide resource encapsulation by supporting link embedding. Link embedding may be used to provide a single resource with which a client may interact to obtain a set of related resource values. This is analogous to an image tag (link) causing the image to display inline in a browser window. Link embedding enables the bulk processing of items in the collection using a single operation targeting the collection resource. Performing a GET on a collection resource may return a single representation containing all of the embedded linked resources. For example, a collection for manufacturer parameters may consist of manufacturer name, date of manufacture, location of manufacture, and serial number resources which can be read as a single senml data object.
 
-A subset of resources in the collection may be selected for operation using Query Filtering. Bulk Read operations using GET return a SenML representation of all selected resources. Bulk item Update operations using PUT or POST apply the payload document to all selected resource items in the collection, using either a Batch or Group update policy. A Batch update is performed by applying the resource values in the payload document to all resources in the collection that match any resource name in the payload document. Group updates are performed by applying the payload document to each item in the collection. Group updates are indicated by the link relation type rel="grp" in the link. 
+A subset of resources in the collection may be selected for operation using Query Filtering. Bulk Read operations using GET return a SenML representation of all selected resources. Bulk item Update operations using PUT or POST apply the payload document to all selected resource items in the collection, using either a Batch or Group update policy. A Batch update is performed by applying the resource values in the payload document to all resources in the collection that match any resource name in the payload document. Group updates are performed by applying the payload document to each item in the collection. Group updates are indicated by the link relation type rel="grp" in the link.
 
 Queries on Collections        {#queries}
 ----------------------
@@ -244,7 +250,7 @@ There are three collection types defined in this document:
 | Linked Batch    | core.lb | link-format, senml |
 {: #collectiontype title="Collection Type Summary"}
 
-The interface description defined in this document offer a deeper explanation of the methods and functions that may be applied to the three collections. 
+The interface description defined in this document offer a deeper explanation of the methods and functions that may be applied to the three collections.
 
 Interface Descriptions    {#interfaces}
 =======================
@@ -288,7 +294,7 @@ Res: 2.05 Content (application/link-format)
 
 Link List           {#hlink-list}
 ---------
-The Link List interface is used to retrieve (GET) a list of resources on an origin server. The GET request SHOULD contain an Accept option with the application/link-format content format. However if the resource does not support any other form of content-format the Accept option MAY be elided. 
+The Link List interface is used to retrieve (GET) a list of resources on an origin server. The GET request SHOULD contain an Accept option with the application/link-format content format. However if the resource does not support any other form of content-format the Accept option MAY be elided.
 
 Note: The use of an Accept option with application/link-format is recommended even though it is not strictly needed for the link list interface because this interface is extended by the batch and linked batch interfaces where different content-formats are possible.
 
@@ -332,7 +338,7 @@ The following example interacts with a Linked Batch /l/ and creates a collection
 ~~~~
 Req: POST /l/ (Content-Format: application/link-format)
 </s/light>,</s/temp>
-Res: 2.04 Changed 
+Res: 2.04 Changed
 
 Req: GET /l/
 Res: 2.05 Content (application/senml+json)
@@ -343,7 +349,7 @@ Res: 2.05 Content (application/senml+json)
 
 Req: POST /l/ (Content-Format: application/link-format)
 </s/humidity>
-Res: 2.04 Changed 
+Res: 2.04 Changed
 
 Req: GET /l/ (Accept: application/link-format)
 Res: 2.05 Content (application/link-format)
@@ -392,7 +398,7 @@ node5
 
 Req: PUT /d/name (text/plain)
 outdoor
-Res: 2.04 Changed 
+Res: 2.04 Changed
 ~~~~
 
 Read-only Parameter       {#hreadonly-parameter}
@@ -420,10 +426,10 @@ Res: 2.05 Content (text/plain)
 
 Req: PUT /a/1/led (text/plain)
 1
-Res: 2.04 Changed 
+Res: 2.04 Changed
 
 Req: POST /a/1/led (text/plain)
-Res: 2.04 Changed 
+Res: 2.04 Changed
 
 Req: GET /a/1/led
 Res: 2.05 Content (text/plain)
@@ -443,51 +449,51 @@ This document registers the following CoRE Interface Description (if=) Link Targ
 Link List
 ---------
 
-Attribute Value: 
+Attribute Value:
 : core.ll
 
-Description: 
-: The Link List interface is used to retrieve a list of resources on an origin server. 
+Description:
+: The Link List interface is used to retrieve a list of resources on an origin server.
 
 Reference:
 : This document. Note to RFC Editor - please insert the appropriate RFC reference.
 
-Notes: 
+Notes:
 : None
 
 Batch
 -----
 
-Attribute Value: 
+Attribute Value:
 : core.b
 
-Description: The Batch interface is used to manipulate a collection of sub-resources at the same time. 
+Description: The Batch interface is used to manipulate a collection of sub-resources at the same time.
 
 Reference:
 : This document. Note to RFC Editor - please insert the appropriate RFC reference.
 
-Notes: 
+Notes:
 : None
 
 Linked Batch
 ------------
 
-Attribute Value: 
+Attribute Value:
 : core.lb
 
-Description: 
+Description:
 : The Linked Batch interface is an extension of the Batch interface. Contrary to the basic Batch which is a collection statically defined by the origin server, a Linked Batch is dynamically controlled by a client.
 
 Reference:
 : This document. Note to RFC Editor - please insert the appropriate RFC reference.
 
-Notes: 
+Notes:
 : None
 
 Sensor
 ------
 
-Attribute Value: 
+Attribute Value:
 : core.s
 
 Description:
@@ -496,7 +502,7 @@ Description:
 Reference:
 : This document. Note to RFC Editor - please insert the appropriate RFC reference.
 
-Notes: 
+Notes:
 : None
 
 Parameter
@@ -505,33 +511,33 @@ Parameter
 Attribute Value: core.p
 
 Description:
-: The Parameter interface allows configurable parameters and other information to be modeled as a resource. The value of the parameter can be read or update. 
+: The Parameter interface allows configurable parameters and other information to be modeled as a resource. The value of the parameter can be read or update.
 
 Reference:
 : This document. Note to RFC Editor - please insert the appropriate RFC reference.
 
-Notes: 
+Notes:
 : None
 
 Read-only parameter
 -------------------
 
-Attribute Value: 
+Attribute Value:
 : core.rp
 
 Description:
-: The Read-only Parameter interface allows configuration parameters to be read but not updated. 
+: The Read-only Parameter interface allows configuration parameters to be read but not updated.
 
 Reference:
 : This document. Note to RFC Editor - please insert the appropriate RFC reference.
 
-Notes: 
+Notes:
 : None
 
 Actuator
 --------
 
-Attribute Value: 
+Attribute Value:
 : core.a
 
 Description:
@@ -540,7 +546,7 @@ Description:
 Reference:
 : This document. Note to RFC Editor - please insert the appropriate RFC reference.
 
-Notes: 
+Notes:
 : None
 
 Acknowledgements
@@ -552,7 +558,7 @@ Changelog
 Changes from -10 to 09:
 
 * Section 1: Amendments to remove discussing properties.
-* 
+*
 * New author and editor added.
 
 Changes from -08 to 09:
@@ -690,7 +696,7 @@ Editor's note: This appendix will be removed. It is only included for informatio
 
 This appendix analyses the current landscape with regards the definition and use of collections, interfaces and function sets/profiles. This should be considered when considering the scope of this document.
 
-In summary it can be seen that there is a lack of consistency of the definition and usage of interface description and function sets. 
+In summary it can be seen that there is a lack of consistency of the definition and usage of interface description and function sets.
 
 
 Constrained RESTful Environments (CoRE) Link Format (IETF)
@@ -702,10 +708,10 @@ Whilst 3.2/{{RFC6690}} defines a new Interface Description 'if' attribute the pr
 
 Function sets are not discussed.
 
-CoRE Resource Directory  (IETF) 
+CoRE Resource Directory  (IETF)
 -----------------------
 
-{{I-D.ietf-core-resource-directory}} uses the concepts of collections, interfaces and function sets. 
+{{I-D.ietf-core-resource-directory}} uses the concepts of collections, interfaces and function sets.
 
 If defines a number of interfaces: discovery, registration, registration update, registration removal, read endpoint links, update endpoint links, registration request interface, removal request interface and lookup interface. However it does not assign an interface description identifier (if=) to these interfaces.  
 
@@ -725,10 +731,10 @@ read-only:    OCF (oic.if.r) -> IETF (core.rp)
 read-write:   OCF (oic.if.rw) -> IETF (core.p)
 actuator:     OCF (oic.if.a) -> IETF (core.a)
 sensor:       OCF (oic.if.s) -> IETF (core.s)
-batch:        No OCF equivalent -> IETF (core.b) 
+batch:        No OCF equivalent -> IETF (core.b)
 ~~~~
 
-Some of the OCF interfaces make use of collections. 
+Some of the OCF interfaces make use of collections.
 
 The OIC Core specification does not use the concept of function sets. It does however discuss the concept of profiles. The OCF defines two sets of documents. The core specification documents such as {{OIC-Core}} and vertical profile specification documents which provide specific information for specific applications. The OIC Smart Home Device Specification {{OIC-SmartHome}} is one such specification. It provides information on the resource model, discovery and data types.
 
@@ -752,7 +758,7 @@ It does not identify the interfaces through an Interface Description (if=) attri
 
 It does not use the term function set. Informally the specification could be considered as a function set.
 
-Note: It refers to draft-ietf-core-interfaces-00. It also makes use of the binding/observation attributes from draft-ietf-dynlink-00 but does not refer to that document. 
+Note: It refers to draft-ietf-core-interfaces-00. It also makes use of the binding/observation attributes from draft-ietf-dynlink-00 but does not refer to that document.
 
 Resource Profile example          {#simple-profile}
 ===============
@@ -781,4 +787,3 @@ The following is a short definition of simple device resource profile. This simp
 | Type | Path       | RT             | IF     | Data Type   |
 |  LED | /a/{#}/led | simple.act.led | core.a | xsd:boolean |
 {: #tabafs title="Actuator Resources"}
-
