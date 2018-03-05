@@ -119,7 +119,7 @@ This document defines a set of Constrained RESTful Environments (CoRE) Link Form
 
 The Batch, Linked Batch and Link List interfaces make use of resource collections. This document further describes how collections relate to interfaces.
 
-Many applications require a set of interface descriptions in order provide the required functionality. This document defines an Interface Description atribute value to describe resources conforming to a particular interface.
+any applications require a set of interface descriptions in order provide the required functionality. This document defines an Interface Description atribute value to describe resources conforming to a particular interface.
 
 Editor's notes:
 
