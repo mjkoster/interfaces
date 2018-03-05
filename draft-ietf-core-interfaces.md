@@ -2,7 +2,7 @@
 title: "Reusable Interface Definitions for Constrained RESTful Environments"
 abbrev: Interface Definitions for CoRE
 docname: draft-ietf-core-interfaces-latest
-date: 2018-03-03
+date: 2018-03-05
 category: info
 
 ipr: trust200902
@@ -201,6 +201,13 @@ Links:
 Items:
 : application/senml+json, text/plain
 
+Link Embedding        {#embedding}
+--------------
+
+Collections may provide resource encapsulation by supporting link embedding. Link embedding may be used to provide a single resource with which a client may interact to obtain a set of related resource values. This is analogous to an image tag (link) causing the image to display inline in a browser window. Link embedding enables the bulk processing of items in the collection using a single operation targeting the collection resource. Performing a GET on a collection resource may return a single representation containing all of the embedded linked resources. For example, a collection for manufacturer parameters may consist of manufacturer name, date of manufacture, location of manufacture, and serial number resources which can be read as a single senml data object.
+
+A subset of resources in the collection may be selected for operation using Query Filtering. Bulk Read operations using GET return a SenML representation of all selected resources. Bulk item Update operations using PUT or POST apply the payload document to all selected resource items in the collection, using either a Batch or Group update policy. A Batch update is performed by applying the resource values in the payload document to all resources in the collection that match any resource name in the payload document. Group updates are performed by applying the payload document to each item in the collection. Group updates are indicated by the link relation type rel="grp" in the link.
+
 Links and Items in Collections      {#links-items}
 ------------------------------
 Links use CoRE Link-Format representation by default and may point to any resource reachable from the context of the collection. This includes links to resources with absolute paths as well as links that point to other network locations, if the context of the collection allows. Links to sub-resources in the collection MUST have a path-element starting with the resource name, as per {{RFC3986}}. Links to resources in the global context MUST start with a root path identifier {{RFC8288}}. Links to other collections are formed per {{RFC3986}}.
@@ -224,13 +231,6 @@ Examples of links:
 Links in the collection MAY be Read, Updated, Added, or Removed using the CoRE Link-Format or JSON Merge-Patch Content-Formats on the collection resource. Reading links uses the GET method and returns an array or list containing the link-values of all selected links. Links may be added to the collection using POST or PATCH methods. Updates to links MUST use the PATCH method and MAY use query filtering to select links for updating. The PATCH method on links MUST use the JSON Merge-Patch Content-Format (application/merge-patch+json) specified in {{RFC7396}}.
 
 Items in the collection SHOULD be represented using the SenML (application/senml+json) or plain text (text/plain) Content-Formats, depending on whether the representation is of a single data point or multiple data points. Items MAY be represented using any supported Content-Format.
-
-Link Embedding        {#embedding}
---------------
-
-Collections may provide resource encapsulation by supporting link embedding. Link embedding may be used to provide a single resource with which a client may interact to obtain a set of related resource values. This is analogous to an image tag (link) causing the image to display inline in a browser window. Link embedding enables the bulk processing of items in the collection using a single operation targeting the collection resource. Performing a GET on a collection resource may return a single representation containing all of the embedded linked resources. For example, a collection for manufacturer parameters may consist of manufacturer name, date of manufacture, location of manufacture, and serial number resources which can be read as a single senml data object.
-
-A subset of resources in the collection may be selected for operation using Query Filtering. Bulk Read operations using GET return a SenML representation of all selected resources. Bulk item Update operations using PUT or POST apply the payload document to all selected resource items in the collection, using either a Batch or Group update policy. A Batch update is performed by applying the resource values in the payload document to all resources in the collection that match any resource name in the payload document. Group updates are performed by applying the payload document to each item in the collection. Group updates are indicated by the link relation type rel="grp" in the link.
 
 Queries on Collections        {#queries}
 ----------------------
@@ -555,25 +555,36 @@ Acknowledgement is given to colleagues from the SENSEI project who were critical
 
 Changelog
 =========
-Changes from -10 to 09:
+
+Changes from -10 to -11:
+
+* Added a new Section 3.4 for Link Embedding
+
+* Updated examples in Section 3.5
+
+* Removed "Service Discovery" from Terminologies
+
+* Removed discussion of function sets
+
+Changes from -09 to -10:
 
 * Section 1: Amendments to remove discussing properties.
 *
 * New author and editor added.
 
-Changes from -08 to 09:
+Changes from -08 to -09:
 
 * Section 3.6: Modified to indicate that the entire collection resource is returned.
 
 * General: Added editor's note with open issues.
 
-Changes from -07 to 08:
+Changes from -07 to -08:
 
 * Section 3.3: Modified Accepts to Accept header option.
 
 * Addressed the editor's note in {{hlink-list}} to clarify the use of the Accept option.
 
-Changes from -06 to 07:
+Changes from -06 to -07:
 
 * Corrected {{figbindexp}} sub-resource names e.g. tmp to temp and hum to humidity.
 
