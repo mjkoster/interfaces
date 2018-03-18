@@ -54,7 +54,7 @@ author:
   email: cngroves.std@gmail.com
 
 - ins: J. Zhu
-  name: Julian Zhu
+  name: Jintao Zhu
   org: Huawei
   street: No.127 Jinye Road, Huawei Base, High-Tech Development District
   city: Xi’an, Shaanxi Province
