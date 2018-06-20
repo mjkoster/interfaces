@@ -171,7 +171,7 @@ Section 1.2.2/{{RFC6690}} also describes resource collections.
 
 This document uses the concept of "collection" and applies it to interface descriptions. A collection interface description consists of a set of links and a set of items pointed to by the links which may be sub-resources of the collection resource. The collection interface descriptions described in this document are Link List, Batch and Linked Batch.
 
-The links in a collection are represented in CoRE Link-Format Content-Formats including JSON and CBOR variants, and the items in the collection may be represented by senml, including JSON and CBOR variants. In general, a collection may support items of any available Content-Format.
+The links in a collection are represented in CoRE Link-Format Content-Formats including JSON and CBOR variants, and the items in the collection may be represented by SenML, including JSON and CBOR variants. In general, a collection may support items of any available Content-Format.
 
 A particular resource item may be a member of more than one collection at a time by being linked to, but may only be a subresource of one collection.
 
@@ -204,7 +204,7 @@ Items:
 Link Embedding        {#embedding}
 --------------
 
-Collections may provide resource encapsulation by supporting link embedding. Link embedding may be used to provide a single resource with which a client may interact to obtain a set of related resource values. This is analogous to an image tag (link) causing the image to display inline in a browser window. Link embedding enables the bulk processing of items in the collection using a single operation targeting the collection resource. Performing a GET on a collection resource may return a single representation containing all of the embedded linked resources. For example, a collection for manufacturer parameters may consist of manufacturer name, date of manufacture, location of manufacture, and serial number resources which can be read as a single senml data object.
+Collections may provide resource encapsulation by supporting link embedding. Link embedding may be used to provide a single resource with which a client may interact to obtain a set of related resource values. This is analogous to an image tag (link) causing the image to display inline in a browser window. Link embedding enables the bulk processing of items in the collection using a single operation targeting the collection resource. Performing a GET on a collection resource may return a single representation containing all of the embedded linked resources. For example, a collection for manufacturer parameters may consist of manufacturer name, date of manufacture, location of manufacture, and serial number resources which can be read as a single SenML data object.
 
 A subset of resources in the collection may be selected for operation using Query Filtering. Bulk Read operations using GET return a SenML representation of all selected resources. Bulk item Update operations using PUT or POST apply the payload document to all selected resource items in the collection, using either a Batch or Group update policy. A Batch update is performed by applying the resource values in the payload document to all resources in the collection that match any resource name in the payload document. Group updates are performed by applying the payload document to each item in the collection. Group updates are indicated by the link relation type rel="grp" in the link.
 
@@ -322,11 +322,11 @@ The following example interacts with a Batch /s/ with Sensor sub-resources /s/li
 ~~~~
 Req: GET /s/
 Res: 2.05 Content (application/senml+json)
-{"e":[
+[
     { "n": "light", "v": 123, "u": "lx" },
-    { "n": "temp", "v": 27.2, "u": "degC" },
-    { "n": "humidity", "v": 80, "u": "%RH" }],
-}
+    { "n": "temp", "v": 27.2, "u": "Cel" },
+    { "n": "humidity", "v": 80, "u": "%RH" }
+]
 ~~~~
 
 Linked Batch          {#hlinked-batch}
@@ -342,10 +342,10 @@ Res: 2.04 Changed
 
 Req: GET /l/
 Res: 2.05 Content (application/senml+json)
-{"e":[
+[
    { "n": "/s/light", "v": 123, "u": "lx" },
-   { "n": "/s/temp", "v": 27.2, "u": "degC" },
-}
+   { "n": "/s/temp", "v": 27.2, "u": "Cel" }
+]
 
 Req: POST /l/ (Content-Format: application/link-format)
 </s/humidity>
@@ -357,11 +357,11 @@ Res: 2.05 Content (application/link-format)
 
 Req: GET /l/
 Res: 2.05 Content (application/senml+json)
-{"e":[
+[
    { "n": "/s/light", "v": 123, "u": "lx" },
-   { "n": "/s/temp", "v": 27.2, "u": "degC" },
-   { "n": "/s/humidity", "v": 80, "u": "%RH" }],
-}
+   { "n": "/s/temp", "v": 27.2, "u": "Cel" },
+   { "n": "/s/humidity", "v": 80, "u": "%RH" },
+]
 
 Req: DELETE /l/
 Res: 2.02 Deleted
@@ -380,9 +380,9 @@ Res: 2.05 Content (text/plain)
 
 Req: GET /s/humidity (Accept: application/senml+json)
 Res: 2.05 Content (application/senml+json)
-{"e":[
-    { "n": "humidity", "v": 80, "u": "%RH" }],
-}
+[
+    { "n": "humidity", "v": 80, "u": "%RH" }
+]
 ~~~~
 
 Parameter           {#hparameter}
@@ -551,7 +551,7 @@ Notes:
 
 Acknowledgements
 ================
-Acknowledgement is given to colleagues from the SENSEI project who were critical in the initial development of the well-known REST interface concept, to members of the IPSO Alliance where further requirements for interface descriptions have been discussed, and to Szymon Sasin, Cedric Chauvenet, Daniel Gavelle and Carsten Bormann who have provided useful discussion and input to the concepts in this document.
+Acknowledgement is given to colleagues from the SENSEI project who were critical in the initial development of the well-known REST interface concept, to members of the IPSO Alliance where further requirements for interface descriptions have been discussed, and to Szymon Sasin, Cedric Chauvenet, Daniel Gavelle and Carsten Bormann who have provided useful discussion and input to the concepts in this document. Ari Keränen provided updated SenML examples.
 
 Changelog
 =========
