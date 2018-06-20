@@ -2,7 +2,7 @@
 title: "Reusable Interface Definitions for Constrained RESTful Environments"
 abbrev: Interface Definitions for CoRE
 docname: draft-ietf-core-interfaces-latest
-date: 2018-06-20
+#date: 2018-06-20
 category: info
 
 ipr: trust200902
@@ -288,7 +288,7 @@ Res: 2.05 Content (application/link-format)
 </a/1/led>;rt="simple.act.led";if="core.a",
 </a/2/led>;rt="simple.act.led";if="core.a",
 </d/>;rt="simple.dev";if="core.ll",
-</l/>;if="core.lb",
+</l/>;if="core.lb"
 ~~~~
 {: #figbindexp title="Binding Interface Example"}
 
@@ -360,7 +360,7 @@ Res: 2.05 Content (application/senml+json)
 [
    { "n": "/s/light", "v": 123, "u": "lx" },
    { "n": "/s/temp", "v": 27.2, "u": "Cel" },
-   { "n": "/s/humidity", "v": 80, "u": "%RH" },
+   { "n": "/s/humidity", "v": 80, "u": "%RH" }
 ]
 
 Req: DELETE /l/
