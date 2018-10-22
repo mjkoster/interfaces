@@ -75,7 +75,7 @@ informative:
   RFC7396:
   I-D.ietf-core-dynlink:
   I-D.ietf-core-resource-directory:
-  I-D.ietf-core-senml:
+  RFC8428:
 
 
   OIC-Core:
@@ -120,7 +120,7 @@ Editor's notes:
 Introduction        {#introduction}
 ============
 
-IETF Standards for machine to machine communication in constrained environments describe a REST protocol and a set of related information standards that may be used to represent machine data and machine metadata in REST interfaces. CoRE Link-format is a standard for doing Web Linking {{RFC8288}} in constrained environments. SenML {{I-D.ietf-core-senml}} is a simple data model and representation format for composite and complex structured resources. CoRE Link-Format and SenML can be used by CoAP {{RFC7252}} or HTTP servers.
+IETF Standards for machine to machine communication in constrained environments describe a REST protocol and a set of related information standards that may be used to represent machine data and machine metadata in REST interfaces. CoRE Link-format is a standard for doing Web Linking {{RFC8288}} in constrained environments. SenML {{RFC8428}} is a simple data model and representation format for composite and complex structured resources. CoRE Link-Format and SenML can be used by CoAP {{RFC7252}} or HTTP servers.
 
 The discovery of resources offered by a constrained server is very important in machine-to-machine applications where there are no humans in the loop. Machine application clients must be able to adapt to different resource organizations without advance knowledge of the specific data structures hosted by each connected thing. The use of Web Linking for the description and discovery of resources hosted by constrained origin servers is specified by CoRE Link Format {{RFC6690}}. CoRE Link Format additionally defines a link attribute for interface description ("if") that can be used to describe the REST interface of a resource, and may include a link to a description document.
 
@@ -287,7 +287,7 @@ Note: The use of an Accept option with application/link-format is recommended ev
 
 The request returns a list of URI references with absolute paths to the resources as defined in CoRE Link Format. This interface is typically used with a parent resource to enumerate sub-resources but may be used to reference any resource on an origin server.
 
-The following example interacts with a Link List /d containing Parameter sub-resources /d/name, /d/model.
+The following example interacts with a Link List /d/ containing Parameter sub-resources /d/name, /d/model.
 
 ~~~~
 Req: GET /d/ (Accept:application/link-format)
@@ -306,6 +306,7 @@ The following example interacts with a Batch /s/ with Sensor sub-resources /s/li
 Req: GET /s/
 Res: 2.05 Content (application/senml+json)
 [
+    { "bn": "example.com/s/" },
     { "n": "light", "v": 123, "u": "lx" },
     { "n": "temp", "v": 27.2, "u": "Cel" },
     { "n": "humidity", "v": 80, "u": "%RH" }
@@ -326,6 +327,7 @@ Res: 2.04 Changed
 Req: GET /l/
 Res: 2.05 Content (application/senml+json)
 [
+   { "bn": "example.com/" },
    { "n": "/s/light", "v": 123, "u": "lx" },
    { "n": "/s/temp", "v": 27.2, "u": "Cel" }
 ]
@@ -341,6 +343,7 @@ Res: 2.05 Content (application/link-format)
 Req: GET /l/
 Res: 2.05 Content (application/senml+json)
 [
+   { "bn": "example.com/" },
    { "n": "/s/light", "v": 123, "u": "lx" },
    { "n": "/s/temp", "v": 27.2, "u": "Cel" },
    { "n": "/s/humidity", "v": 80, "u": "%RH" }
@@ -364,6 +367,7 @@ Res: 2.05 Content (text/plain)
 Req: GET /s/humidity (Accept: application/senml+json)
 Res: 2.05 Content (application/senml+json)
 [
+    { "bn": "example.com/s/" },
     { "n": "humidity", "v": 80, "u": "%RH" }
 ]
 ~~~~
@@ -422,7 +426,7 @@ Res: 2.05 Content (text/plain)
 
 Security Considerations   {#Security}
 =======================
-An implementation of a client needs to be prepared to deal with responses to a request that differ from what is specified in this document. A server implementing what the client thinks is a resource with one of these interface descriptions could return malformed representations and response codes either by accident or maliciously. A server sending maliciously malformed responses could attempt to take advantage of a poorly implemented client for example to crash the node or perform denial of service.
+An implementation of a client needs to be prepared to deal with responses to a request that differ from what is specified in this document. A server implementing what the client thinks is a resource with one of these interface descriptions could return malformed representations and response codes either by accident or maliciously. A server sending maliciously malformed responses could attempt to take advantage of a poorly implemented client for example to crash the node or perform denial of service. Conversely, a malicious client could attempt to write to arbitrary resources on a poorly implemented server described in a linked batch.
 
 IANA Considerations
 ===================
@@ -534,7 +538,7 @@ Notes:
 
 Acknowledgements
 ================
-Acknowledgement is given to colleagues from the SENSEI project who were critical in the initial development of the well-known REST interface concept, to members of the IPSO Alliance where further requirements for interface descriptions have been discussed, and to Szymon Sasin, Cedric Chauvenet, Daniel Gavelle and Carsten Bormann who have provided useful discussion and input to the concepts in this document. Ari Keränen provided updated SenML examples.
+Acknowledgement is given to colleagues from the SENSEI project who were critical in the initial development of the well-known REST interface concept, to members of the IPSO Alliance where further requirements for interface descriptions have been discussed, and to Szymon Sasin, Cedric Chauvenet, Daniel Gavelle and Carsten Bormann who have provided useful discussion and input to the concepts in this document. Ari Keränen provided updated SenML examples. Christian Amsuss supplied a comprehensive review of draft -12.
 
 Contributors
 ============
@@ -549,6 +553,12 @@ Contributors
 
 Changelog
 =========
+
+Changes from -12 to -13:
+
+* SenML examples now use the Base Name (bn) labels from RFC 8428
+
+* Security considerations discusses client misuse of linked batches  
 
 Changes from -11 to -12:
 
