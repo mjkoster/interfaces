@@ -2,6 +2,7 @@
 title: "Reusable Interface Definitions for Constrained RESTful Environments"
 abbrev: Interface Definitions for CoRE
 docname: draft-ietf-core-interfaces-latest
+date: 2018-10-22
 category: info
 
 ipr: trust200902
